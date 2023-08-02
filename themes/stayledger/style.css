@@ -1,0 +1,38 @@
+/*
+Theme Name: StayLedger
+Theme URI: http://your-theme-url.com
+Description: Main theme for stayledger
+Version: 1.0
+Author: Your Name
+Author URI: http://your-website.com
+License: GPL-2.0+
+License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+Text Domain: your-theme-textdomain
+*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;700&display=swap');
+
+@font-face {
+    font-family: 'Montserrat', 'sans-serif';
+    src: url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;700&display=swap');
+}
+
+:root {
+    --global-font-color: #2E424D;
+    /* Change this value to your desired font color */
+}
+
+body {
+    color: var(--global-font-color);
+}
+
+h1 {
+    color: var(--global-font-color);
+}
+
+p {
+    color: var(--global-font-color);
+}
+
+html {
+    box-sizing: border-box;
+}
