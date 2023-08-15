@@ -20,6 +20,11 @@ if (!defined('_S_VERSION')) {
     define('_S_VERSION', '1.0.0');
 }
 
+register_nav_menus(
+    array(
+        'primary-menu' => 'Header Menu'
+    )
+    );
 
 if (!function_exists('myfirsttheme_setup')) :
 

@@ -1,7 +1,11 @@
-body {
-    
+.nav li {
+    margin: 0px 20px;
 }
 
 .navbar>.container {
     max-width: 75%;
+}
+
+.bottom-margin{
+    margin-bottom: 100px;
 }
