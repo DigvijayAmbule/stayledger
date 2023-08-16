@@ -131,76 +131,130 @@ const Calculator = () => {
   const finalProfit = AfterRepairValue - purchasePrice - finalTotalExpenses;
   const Out_Of_Pocket_Costs =
     pPrice + FinalPurchasecost + finalRehabCost + finalHoldingCost - loanAmount;
-  const ROI =
-    (Out_Of_Pocket_Costs + finalProfit - Out_Of_Pocket_Costs) /
-    Out_Of_Pocket_Costs;
-  const annualROI = ROI / ((endDate - startDate + 1) / 365);
+  const ROI = (finalProfit / Out_Of_Pocket_Costs) * 100;
+  const oneDay = 24 * 60 * 60 * 1000; // One day in milliseconds
+  const timeDiff = Math.ceil((endDate - startDate) / oneDay); // Rounded up to ensure inclusive months
+  const annualROI = ROI / (timeDiff / 365);
+  function calculateMonthsDifference(startDate, endDate) {
+    const startYear = startDate.getFullYear();
+    const startMonth = startDate.getMonth();
+    const endYear = endDate.getFullYear();
+    const endMonth = endDate.getMonth();
 
-  function calculateIRR(startDate, endDate, totalCost, purchaseCost) {
-    const oneDay = 24 * 60 * 60 * 1000; // One day in milliseconds
-    const timeDiff = Math.ceil((endDate - startDate) / oneDay); // Rounded up to ensure inclusive months
+    const months = (endYear - startYear) * 12 + (endMonth - startMonth);
 
-    // Calculate monthly cash flows
-    const monthlyCashFlow = totalCost / timeDiff;
-
-    // Initial guess for IRR (you can adjust this as needed)
-    let guess = 0.1;
-
-    // Define a function to calculate the net present value (NPV)
-    function calculateNPV(rate) {
-      let npv = -purchaseCost;
-      for (let i = 1; i <= timeDiff; i++) {
-        npv += monthlyCashFlow / Math.pow(1 + rate, i / 30.44); // Convert days to months
-      }
-      return npv;
+    // Adjust for cases where the end day is earlier in the month than the start day
+    if (endDate.getDate() < startDate.getDate()) {
+      return months - 1;
     }
 
-    // Define the derivative of the NPV function for the Newton-Raphson method
-    function calculateDerivative(rate) {
-      let derivative = 0;
-      for (let i = 1; i <= timeDiff; i++) {
-        derivative -=
-          (monthlyCashFlow * i) / (30.44 * Math.pow(1 + rate, i / 30.44 + 1)); // Convert days to months
-      }
-      return derivative;
-    }
+    return months;
+  }
+  function calculateCashflow(
+    pPrice,
+    FinalPurchasecost,
+    finalRehabCost,
+    finalHoldingCost,
+    finalSellingCost,
+    AfterRepairValue
+  ) {
+    const pCost = -(pPrice + FinalPurchasecost);
+    const months = calculateMonthsDifference(startDate, endDate);
+    const rCost = finalRehabCost / months - 1;
+    const hCost = finalHoldingCost / months - 1;
+    const selling = AfterRepairValue - finalSellingCost;
 
-    // Use the Newton-Raphson method to find IRR
+    const cashFlow = [];
+    cashFlow.push(pCost + rCost + hCost);
+    for (let index = 1; index < months; index++) {
+      cashFlow.push(rCost + hCost);
+    }
+    cashFlow.push(selling);
+    return cashFlow;
+  }
+
+  const cashFlow = calculateCashflow(
+    pPrice,
+    FinalPurchasecost,
+    finalRehabCost,
+    finalHoldingCost,
+    finalSellingCost,
+    AfterRepairValue
+  );
+
+  function calculateIRR(cashFlows) {
     const maxIterations = 100;
     const tolerance = 0.00001;
+
+    const initialGuess = 0.1;
+    let irr = initialGuess;
+
     for (let i = 0; i < maxIterations; i++) {
-      const npv = calculateNPV(guess);
-      const derivative = calculateDerivative(guess);
-      const nextGuess = guess - npv / derivative;
-      console.log("NPV" + npv);
-      console.log("derivative" + derivative);
-      console.log("nextGuess" + nextGuess);
-      if (Math.abs(nextGuess - guess) < tolerance) {
-        return nextGuess * 100; // Convert IRR to percentage
+      const npv = calculateNPV(cashFlows, irr);
+      const derivative = calculateDerivative(cashFlows, irr);
+
+      const nextIRR = irr - npv / derivative;
+
+      if (Math.abs(nextIRR - irr) < tolerance) {
+        return nextIRR * 100; // Convert IRR to percentage
       }
 
-      guess = nextGuess;
+      irr = nextIRR;
     }
 
     // If convergence was not reached, return null
     return null;
   }
+
+  function calculateNPV(cashFlows, rate) {
+    let npv = -cashFlows[0];
+    for (let i = 1; i < cashFlows.length; i++) {
+      npv += cashFlows[i] / Math.pow(1 + rate, i);
+    }
+    return npv;
+  }
+
+  function calculateDerivative(cashFlows, rate) {
+    let derivative = 0;
+    for (let i = 1; i < cashFlows.length; i++) {
+      derivative -= (i * cashFlows[i]) / Math.pow(1 + rate, i + 1);
+    }
+    return derivative;
+  }
+
   useEffect(() => {
-    const irr = calculateIRR(
-      startDate,
-      endDate,
-      finalSellingCost + finalRehabCost,
-      FinalPurchasecost
-    );
+    const irr = calculateIRR(cashFlow);
     setIRR(irr);
-  }, [startDate, endDate, finalSellingCost, finalRehabCost, FinalPurchasecost]);
+  }, [
+    purchasePrice,
+    AppraisalFees,
+    SurveysFees,
+    ClosingCosts,
+    Materials,
+    Contractor,
+    AfterRepairValue,
+    CommissionToAgents,
+    SellingClosingCosts,
+    loanAmount,
+    loanOriginationCost,
+    interestRate,
+    startDate,
+    endDate,
+    propertyTaxes,
+    insurance,
+    utilities,
+    other,
+  ]);
 
   console.log(irr + "irr");
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col">
+      <div className="row ">
+        <div
+          className="col-7 mr-5 border rounded"
+          style={{ background: "rgba(47,43,67,0.1)" }}
+        >
           <Header></Header>
           <Propertyaddress></Propertyaddress>
           <Propertyinfo></Propertyinfo>
@@ -235,7 +289,7 @@ const Calculator = () => {
             onSellingClosingCostsChange={handleSellingClosingCosts}
           ></Sellingcost>
         </div>
-        <div className="col">
+        <div className="col h-50 border rounded shadow bg-white sticky-top">
           <Calculation
             finalProfit={finalProfit}
             pPrice={pPrice}

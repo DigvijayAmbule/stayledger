@@ -37,52 +37,67 @@ const Purchasecost = ({
 
   return (
     <div>
-      <h1>Purchase Costs</h1>
+      <div className="form-group">
+        <h1 htmlFor="inputAddress" className="col-form-label mb-1 mt-2">
+          Purchase Cost
+        </h1>
+      </div>
       <div>
-        <div>
-          <label htmlFor="">Purchase price</label>
-          <input
-            type="text"
-            id="purchasePrice"
-            value={purchasePrice}
-            onChange={handlePurchasePrice}
-            placeholder="$000,000"
-          />
-          <label htmlFor="">Appraisal fees</label>
-          <input
-            type="text"
-            id="AppraisalFees"
-            value={AppraisalFees}
-            onChange={handleAppraisalFees}
-            placeholder="$000,000"
-          />
+        <div className="row">
+          <div className="col">
+            <label htmlFor="">Purchase price</label>
+            <input
+              className="form-control form-control-sm"
+              type="text"
+              id="purchasePrice"
+              value={purchasePrice}
+              onChange={handlePurchasePrice}
+              placeholder="$000,000"
+            />
+          </div>
+          <div className="col">
+            <label htmlFor="">Appraisal fees</label>
+            <input
+              className="form-control form-control-sm"
+              type="text"
+              id="AppraisalFees"
+              value={AppraisalFees}
+              onChange={handleAppraisalFees}
+              placeholder="$000,000"
+            />
+          </div>
         </div>
-        <div>
-          <label htmlFor="">Inspection/ surveys fees</label>
-          <input
-            type="text"
-            id="SurveysFees"
-            value={SurveysFees}
-            onChange={handleSurveysFees}
-            placeholder="$000,000"
-          />
-          <label htmlFor="">Closing costs</label>
-          <input
-            type="text"
-            id="ClosingCosts"
-            value={ClosingCosts}
-            onChange={handleClosingCosts}
-            placeholder="$000,000"
-          />
+        <div className="row">
+          <div className="col">
+            <label htmlFor="">Inspection/ surveys fees</label>
+            <input
+              className="form-control form-control-sm"
+              type="text"
+              id="SurveysFees"
+              value={SurveysFees}
+              onChange={handleSurveysFees}
+              placeholder="$000,000"
+            />
+          </div>
+          <div className="col">
+            <label htmlFor="">Closing costs</label>
+            <input
+              className="form-control form-control-sm"
+              type="text"
+              id="ClosingCosts"
+              value={ClosingCosts}
+              onChange={handleClosingCosts}
+              placeholder="$000,000"
+            />
+          </div>
+          <small id="passwordHelpBlock" className="form-text text-muted">
+            Lorem ipsum dolor sit amet consectetur. Duis varius massa eu donec
+            odio adipiscing id quis penatibus. Lectus nec vitae varius tellus
+            commodo vel praesent. Eget nisi ornare tristique sapien lorem id
+            imperdie.
+          </small>
         </div>
       </div>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam
-        velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate
-        commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed
-        eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
-        nec dui. Quisque
-      </p>
     </div>
   );
 };

@@ -37,52 +37,69 @@ const Holdingcosts = ({
 
   return (
     <div>
-      <h1>Holding Costs</h1>
-      <div>
-        <div>
-          <label htmlFor="">Property taxes</label>
-          <input
-            type="text"
-            id="PropertyTaxes"
-            value={propertyTaxes}
-            onChange={handlePropertyTaxes}
-            placeholder="$000,000"
-          />
-          <label htmlFor="">Insurance</label>
-          <input
-            type="text"
-            id="Insurance"
-            value={insurance}
-            onChange={handleInsurance}
-            placeholder="$000,000"
-          />
-        </div>
-        <div>
-          <label htmlFor="">Utilities</label>
-          <input
-            type="text"
-            id="Utilities"
-            value={utilities}
-            onChange={handleUtilities}
-            placeholder="$000,000"
-          />
-          <label htmlFor="">Other</label>
-          <input
-            type="text"
-            id="Other"
-            value={other}
-            onChange={handleOther}
-            placeholder="$000,000"
-          />
-        </div>
+      <div className="form-group">
+        <h1 htmlFor="HoldingCosts" className="col-form-label mb-1 mt-2">
+        Holding Costs
+        </h1>
       </div>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam
-        velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate
-        commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed
-        eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
-        nec dui. Quisque
-      </p>
+      <div>
+        <div className="row">
+          <div className="col">
+            <label htmlFor="">Property taxes</label>
+            <input
+              type="text"
+              id="PropertyTaxes"
+              value={propertyTaxes}
+              onChange={handlePropertyTaxes}
+              placeholder="$000,000"
+              className="form-control form-control-sm"
+            />
+          </div>
+
+          <div className="col">
+            <label htmlFor="">Insurance</label>
+            <input
+              type="text"
+              id="Insurance"
+              value={insurance}
+              onChange={handleInsurance}
+              placeholder="$000,000"
+              className="form-control form-control-sm"
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <label htmlFor="">Utilities</label>
+            <input
+              type="text"
+              id="Utilities"
+              value={utilities}
+              onChange={handleUtilities}
+              placeholder="$000,000"
+              className="form-control form-control-sm"
+            />
+          </div>
+
+          <div className="col">
+            <label htmlFor="">Other</label>
+            <input
+              type="text"
+              id="Other"
+              value={other}
+              onChange={handleOther}
+              placeholder="$000,000"
+              className="form-control form-control-sm"
+            />
+          </div>
+        </div>
+        <small id="passwordHelpBlock" className="form-text text-muted">
+          Lorem ipsum dolor sit amet consectetur. Duis varius massa eu donec
+          odio adipiscing id quis penatibus. Lectus nec vitae varius tellus
+          commodo vel praesent. Eget nisi ornare tristique sapien lorem id
+          imperdie.
+        </small>
+      </div>
     </div>
   );
 };

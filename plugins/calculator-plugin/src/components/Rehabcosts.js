@@ -18,32 +18,41 @@ const Rehabcosts = ({ onMaterialsChange, onContractorChange }) => {
 
   return (
     <div>
-      <h1>Rehab Costs</h1>
-      <div>
-        <label htmlFor="">Materials</label>
-        <input
-          type="text"
-          id="Materials"
-          value={Materials}
-          onChange={handleMaterials}
-          placeholder="$000,000"
-        />
-        <label htmlFor="">Contractor / Labor</label>
-        <input
-          type="text"
-          id="Contractor"
-          value={Contractor}
-          onChange={handleContractor}
-          placeholder="$000,000"
-        />
+      <div className="form-group">
+        <h1 htmlFor="inputAddress" className="col-form-label mb-1 mt-2">
+          Rehab Costs
+        </h1>
       </div>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam
-        velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate
-        commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed
-        eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
-        nec dui. Quisque
-      </p>
+      <div className="row">
+        <div className="col">
+          <label htmlFor="">Materials</label>
+          <input
+            type="text"
+            id="Materials"
+            value={Materials}
+            onChange={handleMaterials}
+            placeholder="$000,000"
+            className="form-control form-control-sm"
+          />
+        </div>
+        <div className="col">
+          <label htmlFor="">Contractor / Labor</label>
+          <input
+            type="text"
+            id="Contractor"
+            value={Contractor}
+            onChange={handleContractor}
+            placeholder="$000,000"
+            className="form-control form-control-sm"
+          />
+        </div>
+        <small id="passwordHelpBlock" className="form-text text-muted">
+          Lorem ipsum dolor sit amet consectetur. Duis varius massa eu donec
+          odio adipiscing id quis penatibus. Lectus nec vitae varius tellus
+          commodo vel praesent. Eget nisi ornare tristique sapien lorem id
+          imperdie.
+        </small>
+      </div>
     </div>
   );
 };

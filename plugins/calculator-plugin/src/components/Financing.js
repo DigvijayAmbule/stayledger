@@ -9,8 +9,6 @@ const Financing = ({
   const [loanOriginationCost, setLoanOriginationCost] = useState("");
   const [interestRate, setInterestRate] = useState("");
 
- 
-
   function handleLoanAmount(e) {
     const val = e.target.value;
     setLoanAmount(val);
@@ -30,10 +28,15 @@ const Financing = ({
   }
 
   return (
-    <div>
-      <h1>Financing</h1>
-      <div>
-        <div className="input-group">
+    <>
+      <div className="form-group">
+        <h1 htmlFor="Financing" className="col-form-label mb-1 mt-2">
+          Financing
+        </h1>
+      </div>
+
+      <div className="row">
+        <div className="col">
           <label htmlFor="">Loan amount</label>
           <input
             type="text"
@@ -41,9 +44,10 @@ const Financing = ({
             value={loanAmount}
             onChange={handleLoanAmount}
             placeholder="$000,000"
+            className="form-control form-control-sm"
           />
         </div>
-        <div>
+        <div className="col">
           <label htmlFor="">Loan origination cost</label>
           <input
             type="text"
@@ -51,7 +55,12 @@ const Financing = ({
             value={loanOriginationCost}
             onChange={handleLoanOriginationCost}
             placeholder="$000,000"
+            className="form-control form-control-sm"
           />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-sm-4 mb-1">
           <label htmlFor="">Interest rate</label>
           <input
             type="text"
@@ -59,17 +68,17 @@ const Financing = ({
             value={interestRate}
             onChange={handleInterestRate}
             placeholder="$000,000"
+            className="form-control form-control-sm"
           />
         </div>
+        <small id="passwordHelpBlock" className="form-text text-muted">
+          Lorem ipsum dolor sit amet consectetur. Duis varius massa eu donec
+          odio adipiscing id quis penatibus. Lectus nec vitae varius tellus
+          commodo vel praesent. Eget nisi ornare tristique sapien lorem id
+          imperdie.
+        </small>
       </div>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam
-        velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate
-        commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed
-        eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
-        nec dui. Quisque
-      </p>
-    </div>
+    </>
   );
 };
 

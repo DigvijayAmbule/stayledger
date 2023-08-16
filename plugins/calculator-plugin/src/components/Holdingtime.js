@@ -8,31 +8,39 @@ const Holdingtime = ({ onStartDateChange, onEndDateChange }) => {
 
   return (
     <div>
-      <h1>Start Holding Time</h1>
-      <div>
-        <div>
+      <div className="form-group">
+        <h1 htmlFor="inputAddress" className="col-form-label mb-1 mt-2">
+          Hold Time
+        </h1>
+        <p className="mb-1">Start date of loan / Payoff date of loan</p>
+      </div>
+      <div className="row">
+        <div className="form-group col">
           <DatePicker
             selected={startDate}
+            className="form-control form-control-sm"
             onChange={(date) => {
               setStartDate(date);
               onStartDateChange(date);
             }}
           />
+        </div>
+        <div className="form-group col">
           <DatePicker
             selected={endDate}
+            className="form-control form-control-sm"
             onChange={(date) => {
               setEndDate(date);
               onEndDateChange(date);
             }}
           />
         </div>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam
-          velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate
-          commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed
-          eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
-          nec dui. Quisque
-        </p>
+        <small id="passwordHelpBlock" className="form-text text-muted">
+          Lorem ipsum dolor sit amet consectetur. Duis varius massa eu donec
+          odio adipiscing id quis penatibus. Lectus nec vitae varius tellus
+          commodo vel praesent. Eget nisi ornare tristique sapien lorem id
+          imperdie.
+        </small>
       </div>
     </div>
   );
