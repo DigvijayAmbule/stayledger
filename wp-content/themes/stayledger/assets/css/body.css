@@ -1,0 +1,128 @@
+.container {
+    max-width: 75%;
+}
+
+.row {
+    margin-bottom: 5rem;
+}
+img {
+    width: 100%;
+}
+
+.icons {
+    display: inline-block;
+    height: 2.4rem;
+    width: 2.4rem;
+    font-size: 2.4rem;
+}
+
+.icon-container {
+    height: 100%;
+}
+
+.col-md-3 {
+    width: 10%;
+}
+
+.icon-background {
+    color: #E3E4E4;
+}
+
+.fa-2x {
+    font-size: 1.4em;
+}
+
+.col-features {
+    border: 1px solid black;
+    border-radius: .5rem;
+    padding: 2rem .8rem;
+}
+
+.row-features {
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.feature-header {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.testimonial__quote:before {
+    content: "\201C";
+    font-family: Georgia, Times New Roman, Times, serif;
+    font-size: 122pt;
+    left: -20px;
+    opacity: .1;
+    position: absolute;
+    top: 40px;
+    z-index: 0;
+}
+
+.testimonial__quote {
+    font-size: 1.4em;
+    /* line-height: 23px; */
+    line-height: 1.6rem;
+    /* margin: 0 0 10px; */
+    position: relative;
+    white-space: pre-line;
+    margin: 0;
+}
+
+.testimonial__about,
+.testimonial__name {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding-right: 2rem;
+}
+
+.testimonial__about>p {
+    margin: 0;
+}
+
+.weight-text-m {
+    font-weight: 500;
+}
+
+.testimonial__quote__text {
+    margin: 0;
+}
+
+.testimonial__componey {
+    font-weight: 400;
+    font-size: .8rem;
+}
+
+.card {
+    width: 17rem;
+    height: 20rem;
+}
+
+.fa-check {
+    color: #22BC66;
+}
+
+.pricingTier__price {
+    height: 2rem;
+    margin: 25px 0;
+    text-align: center;
+}
+
+.pricingTier .price {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.pricingTier .interval {
+    padding-left: 1px;
+}
+
+.pricingTier .intervalSlash {
+    margin-right: 0.2em;
+}
+
+[class*="col-"] {
+    margin-bottom: 30px;
+}
