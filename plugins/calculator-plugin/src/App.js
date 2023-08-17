@@ -31,6 +31,7 @@ const Calculator = () => {
   const [utilities, setUtilities] = useState(0);
   const [other, setOther] = useState(0);
   const [irr, setIRR] = useState(0);
+  const [FinalPurchasecost, setFinalPurchasecost] = useState(0);
 
   const handlePropertyTaxes = (val) => {
     setPropertyTaxes(parseInt(val));
@@ -109,14 +110,25 @@ const Calculator = () => {
   const sellingClosingCosts = SellingClosingCosts;
   const LoanAmount = loanAmount;
   const InterestRate = interestRate;
-  const FinalPurchasecost =
-    loanAmount * (loanOriginationCost / 100) +
-    (ClosingCosts / 100) * purchasePrice +
-    SurveysFees +
-    AppraisalFees;
   // Appraisel+Inspecton+(Loan origination costs*Loan ammount)+(Closing costs*Purchase price)
 
-  const diffTime = Math.abs(endDate - startDate);
+  useEffect(() => {
+    setFinalPurchasecost(
+      loanAmount * (loanOriginationCost / 100) +
+        (ClosingCosts / 100) * purchasePrice +
+        SurveysFees +
+        AppraisalFees
+    );
+  }, [
+    loanAmount,
+    loanOriginationCost,
+    purchasePrice,
+    ClosingCosts,
+    SurveysFees,
+    AppraisalFees,
+  ]);
+
+  let diffTime = Math.abs(endDate - startDate);
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   const InterestPayments =
     LoanAmount * ((diffDays + 1) / 365) * (InterestRate / 100);
@@ -135,39 +147,45 @@ const Calculator = () => {
   const oneDay = 24 * 60 * 60 * 1000; // One day in milliseconds
   const timeDiff = Math.ceil((endDate - startDate) / oneDay); // Rounded up to ensure inclusive months
   const annualROI = ROI / (timeDiff / 365);
-  function calculateMonthsDifference(startDate, endDate) {
-    const startYear = startDate.getFullYear();
-    const startMonth = startDate.getMonth();
-    const endYear = endDate.getFullYear();
-    const endMonth = endDate.getMonth();
 
-    const months = (endYear - startYear) * 12 + (endMonth - startMonth);
+  // IRR Functions and calculations
 
-    // Adjust for cases where the end day is earlier in the month than the start day
-    if (endDate.getDate() < startDate.getDate()) {
-      return months - 1;
+  function generateDateArray(startDate, endDate) {
+    const datesArray = [];
+    let currentDate = new Date(startDate);
+
+    while (currentDate <= endDate) {
+      datesArray.push(currentDate.toISOString().substring(0, 10));
+      currentDate.setDate(currentDate.getDate() + 1);
     }
 
-    return months;
+    return datesArray;
   }
+
+  // Example usage
+
+  const dates = generateDateArray(startDate, endDate);
+
   function calculateCashflow(
     pPrice,
     FinalPurchasecost,
     finalRehabCost,
     finalHoldingCost,
     finalSellingCost,
-    AfterRepairValue
+    AfterRepairValue,
+    loanAmount,
+    dates
   ) {
-    const pCost = -(pPrice + FinalPurchasecost);
-    const months = calculateMonthsDifference(startDate, endDate);
-    const rCost = finalRehabCost / months - 1;
-    const hCost = finalHoldingCost / months - 1;
-    const selling = AfterRepairValue - finalSellingCost;
+    const pCost = pPrice + FinalPurchasecost - loanAmount;
+    const months = dates.length - 1; //days
+    const rCost = finalRehabCost / months;
+    const hCost = finalHoldingCost / months;
+    const selling = AfterRepairValue - finalSellingCost - loanAmount;
 
     const cashFlow = [];
-    cashFlow.push(pCost + rCost + hCost);
+    cashFlow.push(-(pCost + rCost + hCost));
     for (let index = 1; index < months; index++) {
-      cashFlow.push(rCost + hCost);
+      cashFlow.push(-(rCost + hCost));
     }
     cashFlow.push(selling);
     return cashFlow;
@@ -179,52 +197,72 @@ const Calculator = () => {
     finalRehabCost,
     finalHoldingCost,
     finalSellingCost,
-    AfterRepairValue
+    AfterRepairValue,
+    loanAmount,
+    dates
   );
 
-  function calculateIRR(cashFlows) {
-    const maxIterations = 100;
-    const tolerance = 0.00001;
+  // console.log(cashFlow)
 
-    const initialGuess = 0.1;
-    let irr = initialGuess;
+  function calculateXIRR(cashflows, dates, guess = 0.1) {
+    const MAX_ITERATIONS = dates.length;
+    const TOLERANCE = 1e-6;
 
-    for (let i = 0; i < maxIterations; i++) {
-      const npv = calculateNPV(cashFlows, irr);
-      const derivative = calculateDerivative(cashFlows, irr);
+    function xirrEquation(rate, cashflows, dates) {
+      return cashflows.reduce(
+        (sum, cf, i) =>
+          sum +
+          cf /
+            Math.pow(
+              1 + rate,
+              daysBetween(new Date(dates[i]), new Date(dates[0])) / 365
+            ),
+        0
+      );
+    }
 
-      const nextIRR = irr - npv / derivative;
+    function xirrDerivative(rate, cashflows, dates) {
+      return cashflows.reduce(
+        (sum, cf, i) =>
+          sum -
+          ((daysBetween(new Date(dates[i]), new Date(dates[0])) / 365) * cf) /
+            Math.pow(
+              1 + rate,
+              daysBetween(new Date(dates[i]), new Date(dates[0])) / 365 + 1
+            ),
+        0
+      );
+    }
 
-      if (Math.abs(nextIRR - irr) < tolerance) {
-        return nextIRR * 100; // Convert IRR to percentage
+    function daysBetween(date1, date2) {
+      const oneDay = 24 * 60 * 60 * 1000;
+      return Math.round(Math.abs((new Date(date1) - new Date(date2)) / oneDay));
+    }
+
+    let rate = guess;
+    for (let i = 0; i < MAX_ITERATIONS; i++) {
+      const f = xirrEquation(rate, cashflows, dates);
+      const fPrime = xirrDerivative(rate, cashflows, dates);
+      const newRate = rate - f / fPrime;
+
+      if (Math.abs(newRate - rate) < TOLERANCE) {
+        return newRate;
       }
 
-      irr = nextIRR;
+      rate = newRate;
     }
 
-    // If convergence was not reached, return null
-    return null;
+    return null; // Failed to converge
   }
 
-  function calculateNPV(cashFlows, rate) {
-    let npv = -cashFlows[0];
-    for (let i = 1; i < cashFlows.length; i++) {
-      npv += cashFlows[i] / Math.pow(1 + rate, i);
-    }
-    return npv;
-  }
+  console.log(cashFlow);
 
-  function calculateDerivative(cashFlows, rate) {
-    let derivative = 0;
-    for (let i = 1; i < cashFlows.length; i++) {
-      derivative -= (i * cashFlows[i]) / Math.pow(1 + rate, i + 1);
-    }
-    return derivative;
-  }
+  // const xirr = calculateXIRR(cashFlow, dates);
 
   useEffect(() => {
-    const irr = calculateIRR(cashFlow);
-    setIRR(irr);
+    const irr = calculateXIRR(cashFlow, dates);
+    // const irr = 0;
+    setIRR(irr*100);
   }, [
     purchasePrice,
     AppraisalFees,

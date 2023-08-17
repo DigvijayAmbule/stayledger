@@ -108,7 +108,9 @@ const Calculation = ({
               <h6>Holding cost</h6>
             </div>
             <div className="col">
-              <h6>${finalHoldingCost ? finalHoldingCost : "0000"}</h6>
+              <h6>
+                ${finalHoldingCost ? finalHoldingCost.toFixed(2) : "0000"}
+              </h6>
             </div>
           </div>
         </div>
@@ -127,6 +129,26 @@ const Calculation = ({
             </div>
             <div className="col">
               <h6>${loanAmount ? loanAmount : "0000"}</h6>
+            </div>
+          </div>
+        </div>
+        <div className="col">
+          <div className="row">
+            <div className="col"></div>
+            <div className="col"></div>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <div className="row">
+            <div className="col">
+              <h6>Out Of Pocket Costs</h6>
+            </div>
+            <div className="col">
+              <h6>
+                ${Out_Of_Pocket_Costs ? Out_Of_Pocket_Costs.toFixed(2) : "0000"}
+              </h6>
             </div>
           </div>
         </div>
