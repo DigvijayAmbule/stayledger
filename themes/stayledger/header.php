@@ -16,27 +16,18 @@
     <!-- Font Awosome icons -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <!-- Fonts -->
-    
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri()?>/assets/css/header.css">
     <?php wp_head(); ?>
 
 </head>
-
-<body>
+<body style="background: linear-gradient(180deg, rgba(201,227,255,1) 30%, rgba(201,227,255,1) 10%, rgba(255,255,255,1) 100%);">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand h1" href="#">STAYLEDGER</a>
-
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-
-                    <a class="nav-link" href="#">Get Stated For Free</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Testimonials</a>
-                </li>
-                <li class="nav-item">
-                    <button class="btn btn-outline-dark" type="submit"><span class="btn-label"><i class="fa fa-phone"></i></span>Contact Us</button>
-                </li>
-            </ul>
+            <a class="navbar-brand h1" href="<?php echo site_url() ?>">STAYLEDGER</a>
+            <div class=" justify-content-start">
+                <?php wp_nav_menu(array(
+                    'theme-location'=>'primary-menu',
+                    'menu_class'=>'nav')) ?>
+            </div>
         </div>
     </nav>

@@ -1,0 +1,12 @@
+.footer {
+    height: 18rem;
+    border-radius: 5px;
+
+    background: linear-gradient(180deg, rgba(201,227,255,1) 30%, rgba(201,227,255,1) 10%, rgba(255,255,255,1) 100%);
+}
+
+.task-footer {
+    height: 2rem;
+    text-align: center;
+    background: rgb(220, 212, 238);
+}
