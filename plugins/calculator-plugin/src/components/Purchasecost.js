@@ -38,14 +38,14 @@ const Purchasecost = ({
   return (
     <div>
       <div className="form-group">
-        <h1 htmlFor="inputAddress" className="col-form-label mb-1 mt-2">
+        <h1 htmlFor="PurchaseCost" className="col-form-label mb-1 mt-2">
           Purchase Cost
         </h1>
       </div>
       <div>
         <div className="row">
           <div className="col">
-            <label htmlFor="">Purchase price</label>
+            <label htmlFor="purchasePrice">Purchase price</label>
             <input
               className="form-control form-control-sm"
               type="text"
@@ -56,7 +56,7 @@ const Purchasecost = ({
             />
           </div>
           <div className="col">
-            <label htmlFor="">Appraisal fees</label>
+            <label htmlFor="AppraisalFees">Appraisal fees</label>
             <input
               className="form-control form-control-sm"
               type="text"
@@ -69,7 +69,7 @@ const Purchasecost = ({
         </div>
         <div className="row">
           <div className="col">
-            <label htmlFor="">Inspection/ surveys fees</label>
+            <label htmlFor="SurveysFees">Inspection/ surveys fees</label>
             <input
               className="form-control form-control-sm"
               type="text"
@@ -80,11 +80,11 @@ const Purchasecost = ({
             />
           </div>
           <div className="col">
-            <label htmlFor="">Closing costs</label>
+            <label htmlFor="PurchaseClosingCosts">Closing costs</label>
             <input
               className="form-control form-control-sm"
               type="text"
-              id="ClosingCosts"
+              id="PurchaseClosingCosts"
               value={ClosingCosts}
               onChange={handleClosingCosts}
               placeholder="$000,000"

@@ -37,7 +37,7 @@ const Financing = ({
 
       <div className="row">
         <div className="col">
-          <label htmlFor="">Loan amount</label>
+          <label htmlFor="LoanAmount">Loan amount</label>
           <input
             type="text"
             id="LoanAmount"
@@ -48,7 +48,7 @@ const Financing = ({
           />
         </div>
         <div className="col">
-          <label htmlFor="">Loan origination cost</label>
+          <label htmlFor="LoanOriginationCost">Loan origination cost</label>
           <input
             type="text"
             id="LoanOriginationCost"
@@ -61,7 +61,7 @@ const Financing = ({
       </div>
       <div className="row">
         <div className="col-sm-4 mb-1">
-          <label htmlFor="">Interest rate</label>
+          <label htmlFor="InterestRate">Interest rate</label>
           <input
             type="text"
             id="InterestRate"
