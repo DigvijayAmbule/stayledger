@@ -10,6 +10,8 @@ import Sellingcost from "./components/Sellingcost";
 import Financing from "./components/Financing";
 import Calculation from "./components/Calculation";
 
+import "./assets/css/style.css";
+
 const Calculator = () => {
   const [purchasePrice, setPurchasePrice] = useState(0);
   const [AppraisalFees, setAppraisalFees] = useState(0);
@@ -262,7 +264,7 @@ const Calculator = () => {
   useEffect(() => {
     const irr = calculateXIRR(cashFlow, dates);
     // const irr = 0;
-    setIRR(irr*100);
+    setIRR(irr * 100);
   }, [
     purchasePrice,
     AppraisalFees,
@@ -287,13 +289,28 @@ const Calculator = () => {
   console.log(irr + "irr");
 
   return (
-    <div className="container">
-      <div className="row ">
-        <div
-          className="col-7 mr-5 border rounded"
-          style={{ background: "rgba(47,43,67,0.1)" }}
-        >
-          <Header></Header>
+    <>
+      <div className="header_container"></div>
+      <div className="container">
+        <div className="calculator-header">
+          <div className="item-1">
+            <Header></Header>
+          </div>
+          <div className="sticky-item item-2">
+            <Calculation
+              finalProfit={finalProfit}
+              pPrice={pPrice}
+              FinalPurchasecost={FinalPurchasecost}
+              finalRehabCost={finalRehabCost}
+              finalHoldingCost={finalHoldingCost}
+              loanAmount={loanAmount}
+              Out_Of_Pocket_Costs={Out_Of_Pocket_Costs}
+              ROI={ROI}
+              annualROI={annualROI}
+              IRR={irr}
+            ></Calculation>
+          </div>
+          <div className="item-3">
           <Propertyaddress></Propertyaddress>
           <Propertyinfo></Propertyinfo>
           <Holdingtime
@@ -327,22 +344,10 @@ const Calculator = () => {
             onSellingClosingCostsChange={handleSellingClosingCosts}
           ></Sellingcost>
         </div>
-        <div className="col h-50 border rounded shadow bg-white sticky-top">
-          <Calculation
-            finalProfit={finalProfit}
-            pPrice={pPrice}
-            FinalPurchasecost={FinalPurchasecost}
-            finalRehabCost={finalRehabCost}
-            finalHoldingCost={finalHoldingCost}
-            loanAmount={loanAmount}
-            Out_Of_Pocket_Costs={Out_Of_Pocket_Costs}
-            ROI={ROI}
-            annualROI={annualROI}
-            IRR={irr}
-          ></Calculation>
         </div>
+        
       </div>
-    </div>
+    </>
   );
 };
 
