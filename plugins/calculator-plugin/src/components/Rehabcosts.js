@@ -19,13 +19,13 @@ const Rehabcosts = ({ onMaterialsChange, onContractorChange }) => {
   return (
     <div>
       <div className="form-group">
-        <h1 htmlFor="inputAddress" className="col-form-label mb-1 mt-2">
+        <h1 htmlFor="RehabCosts" className="col-form-label mb-1 mt-2">
           Rehab Costs
         </h1>
       </div>
       <div className="row">
         <div className="col">
-          <label htmlFor="">Materials</label>
+          <label htmlFor="Materials">Materials</label>
           <input
             type="text"
             id="Materials"
@@ -36,7 +36,7 @@ const Rehabcosts = ({ onMaterialsChange, onContractorChange }) => {
           />
         </div>
         <div className="col">
-          <label htmlFor="">Contractor / Labor</label>
+          <label htmlFor="Contractor">Contractor / Labor</label>
           <input
             type="text"
             id="Contractor"

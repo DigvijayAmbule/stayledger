@@ -24,12 +24,13 @@ const Propertyaddress = () => {
     setCity(val);
   }
   return (
-    <>
+    <div>
       <div className="form-group">
         <h1 htmlFor="inputAddress" className="col-form-label mb-1 mt-2">
           Property Address
         </h1>
         <input
+          id="inputAddress"
           placeholder="Enter Address"
           value={address}
           onChange={handleAddress}
@@ -41,6 +42,7 @@ const Propertyaddress = () => {
         <div className="form-group col">
           <input
             placeholder="city"
+            id="city"
             value={city}
             onChange={handleCity}
             className="form-control form-control-sm"
@@ -109,6 +111,7 @@ const Propertyaddress = () => {
         </div>
         <div className="form-group col">
           <input
+            id="zipcode"
             value={zipcode}
             onChange={handleZipcode}
             placeholder="zipcode"
@@ -116,7 +119,7 @@ const Propertyaddress = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
