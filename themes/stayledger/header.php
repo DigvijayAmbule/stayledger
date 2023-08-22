@@ -72,8 +72,9 @@
             <a class="navbar-brand h1" href="<?php echo site_url() ?>">STAYLEDGER</a>
             <div class=" justify-content-start">
                 <?php wp_nav_menu(array(
-                    'theme-location'=>'primary-menu',
-                    'menu_class'=>'nav')) ?>
+                    'theme-location' => 'primary-menu',
+                    'menu_class' => 'nav'
+                )) ?>
             </div>
         </div>
     </nav> -->

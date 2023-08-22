@@ -1,4 +1,5 @@
 import React from "react";
+import "../assets/css/style.css";
 
 const Calculation = ({
   finalProfit,
@@ -16,65 +17,47 @@ const Calculation = ({
     <>
       <div className="row">
         <div className="col text-center">
-          <h3 className="sub-title">Gross Profit</h3>
+          <h4 className="calc_output_title">Gross Profit</h4>
         </div>
       </div>
       <div className="row">
         <div className="col text-center">
-          <h3 className="sub-title">
+          <h4 className="sub-title">
             ${finalProfit ? finalProfit.toFixed(2) : "0000"}
-          </h3>
+          </h4>
         </div>
       </div>
 
-      <div className="row">
+      <div className="row cal_col_header">
         <div className="col text-center">
-          <h3 className="sub-title">Expenses</h3>
+          <h4 className="calc_output_title_sec">Expenses</h4>
         </div>
         <div className="col text-center">
-          <h3 className="sub-title">Deal Outlook</h3>
+          <h4 className="calc_output_title_sec">Deal Outlook</h4>
         </div>
       </div>
       <div className="row">
         <div className="col">
           <div className="row">
             <div className="col">
-              <h6>Purchase price</h6>
+              <h6 className="calc_output_title_ter">Purchase price</h6>
             </div>
             <div className="col">
-              <h6>${pPrice ? pPrice : "0000"}</h6>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="row">
-            <div className="col">
-              <h6>ROI</h6>
-            </div>
-            <div className="col">
-              <h6>{ROI ? ROI.toFixed(2) : "00.00"}%</h6>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
-          <div className="row">
-            <div className="col">
-              <h6>Purchase cost</h6>
-            </div>
-            <div className="col">
-              <h6>${FinalPurchasecost ? FinalPurchasecost : "0000"}</h6>
+              <p className="calc_output_value_ter">
+                ${pPrice ? pPrice : "0000"}
+              </p>
             </div>
           </div>
         </div>
         <div className="col">
           <div className="row">
             <div className="col">
-              <h6>Annualised ROI</h6>
+              <h6 className="calc_output_title_ter">ROI</h6>
             </div>
             <div className="col">
-              <h6>{annualROI ? annualROI.toFixed(2) : "00.00"}%</h6>
+              <p className="calc_output_value_ter">
+                {ROI ? ROI.toFixed(2) : "00.00"}%
+              </p>
             </div>
           </div>
         </div>
@@ -83,20 +66,24 @@ const Calculation = ({
         <div className="col">
           <div className="row">
             <div className="col">
-              <h6>Rehab cost</h6>
+              <h6 className="calc_output_title_ter">Purchase cost</h6>
             </div>
             <div className="col">
-              <h6>${finalRehabCost ? finalRehabCost : "0000"}</h6>
+              <p className="calc_output_value_ter">
+                ${FinalPurchasecost ? FinalPurchasecost : "0000"}
+              </p>
             </div>
           </div>
         </div>
         <div className="col">
           <div className="row">
             <div className="col">
-              <h6>IRR</h6>
+              <h6 className="calc_output_title_ter">Annualised ROI</h6>
             </div>
             <div className="col">
-              <h6>{IRR ? IRR.toFixed(2) : "00.00"}%</h6>
+              <p className="calc_output_value_ter">
+                {annualROI ? annualROI.toFixed(2) : "00.00"}%
+              </p>
             </div>
           </div>
         </div>
@@ -105,12 +92,38 @@ const Calculation = ({
         <div className="col">
           <div className="row">
             <div className="col">
-              <h6>Holding cost</h6>
+              <h6 className="calc_output_title_ter">Rehab cost</h6>
             </div>
             <div className="col">
-              <h6>
+              <p className="calc_output_value_ter">
+                ${finalRehabCost ? finalRehabCost : "0000"}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="col">
+          <div className="row">
+            <div className="col">
+              <h6 className="calc_output_title_ter">IRR</h6>
+            </div>
+            <div className="col">
+              <p className="calc_output_value_ter">
+                {IRR ? IRR.toFixed(2) : "00.00"}%
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <div className="row">
+            <div className="col">
+              <h6 className="calc_output_title_ter">Holding cost</h6>
+            </div>
+            <div className="col">
+              <p className="calc_output_value_ter">
                 ${finalHoldingCost ? finalHoldingCost.toFixed(2) : "0000"}
-              </h6>
+              </p>
             </div>
           </div>
         </div>
@@ -125,10 +138,12 @@ const Calculation = ({
         <div className="col">
           <div className="row">
             <div className="col">
-              <h6>Loan Amount</h6>
+              <h6 className="calc_output_title_ter">Loan Amount</h6>
             </div>
             <div className="col">
-              <h6>${loanAmount ? loanAmount : "0000"}</h6>
+              <p className="calc_output_value_ter">
+                ${loanAmount ? loanAmount : "0000"}
+              </p>
             </div>
           </div>
         </div>
@@ -143,12 +158,12 @@ const Calculation = ({
         <div className="col">
           <div className="row">
             <div className="col">
-              <h6>Out Of Pocket Costs</h6>
+              <h6 className="calc_output_title_ter">Out Of Pocket Costs</h6>
             </div>
             <div className="col">
-              <h6>
+              <p className="calc_output_value_ter">
                 ${Out_Of_Pocket_Costs ? Out_Of_Pocket_Costs.toFixed(2) : "0000"}
-              </h6>
+              </p>
             </div>
           </div>
         </div>

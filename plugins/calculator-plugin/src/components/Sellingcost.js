@@ -37,7 +37,7 @@ const Sellingcost = ({
       <div>
         <div className="row">
           <div className="col">
-            <label htmlFor="">After repair value (ARV)</label>
+            <label htmlFor="AfterRepairValue">After repair value (ARV)</label>
             <input
               type="text"
               id="AfterRepairValue"
@@ -49,7 +49,7 @@ const Sellingcost = ({
           </div>
 
           <div className="col">
-            <label htmlFor="">Commission to agents</label>
+            <label htmlFor="CommissionToAgents">Commission to agents</label>
             <input
               type="text"
               id="CommissionToAgents"
@@ -62,7 +62,7 @@ const Sellingcost = ({
         </div>
         <div className="row">
           <div className="col">
-            <label htmlFor="">Closing costs</label>
+            <label htmlFor="SellingClosingCosts">Closing costs</label>
             <input
               type="text"
               id="SellingClosingCosts"

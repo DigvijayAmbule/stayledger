@@ -9,7 +9,7 @@ const Holdingtime = ({ onStartDateChange, onEndDateChange }) => {
   return (
     <div>
       <div className="form-group">
-        <h1 htmlFor="inputAddress" className="col-form-label mb-1 mt-2">
+        <h1 htmlFor="HoldTime" className="col-form-label mb-1 mt-2">
           Hold Time
         </h1>
         <p className="mb-1">Start date of loan / Payoff date of loan</p>
