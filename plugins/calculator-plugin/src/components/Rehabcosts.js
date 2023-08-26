@@ -5,13 +5,13 @@ const Rehabcosts = ({ onMaterialsChange, onContractorChange }) => {
   const [Contractor, setContractor] = useState("");
 
   function handleMaterials(e) {
-    const val = e.target.value;
+    const val = e.target.value.replace(/\D/g, "");
     setMaterials(val);
     onMaterialsChange(val);
   }
 
   function handleContractor(e) {
-    const val = e.target.value;
+    const val = e.target.value.replace(/\D/g, "");
     setContractor(val);
     onContractorChange(val);
   }
@@ -25,7 +25,9 @@ const Rehabcosts = ({ onMaterialsChange, onContractorChange }) => {
       </div>
       <div className="row">
         <div className="col">
-          <label htmlFor="Materials">Materials</label>
+          <label className="calculator-label" htmlFor="Materials">
+            Materials
+          </label>
           <input
             type="text"
             id="Materials"
@@ -36,7 +38,9 @@ const Rehabcosts = ({ onMaterialsChange, onContractorChange }) => {
           />
         </div>
         <div className="col">
-          <label htmlFor="Contractor">Contractor / Labor</label>
+          <label className="calculator-label" htmlFor="Contractor">
+            Contractor / Labor
+          </label>
           <input
             type="text"
             id="Contractor"

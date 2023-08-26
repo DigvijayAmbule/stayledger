@@ -150,9 +150,12 @@ function DragDropFile() {
           className={dragActive ? "drag-active" : ""}
         >
           <div>
-            <p>Drag and drop Property photo</p>
+            <p className="drag-drop-title">Drag and drop Property photo</p>
+            <p className="drag-drop-subtitle">
+              JPG, PNG or PDF, file size no more than 10MB
+            </p>
             <button className="upload-button" onClick={onButtonClick}>
-              Upload a file
+              Select file
             </button>
           </div>
         </label>

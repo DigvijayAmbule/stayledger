@@ -5,7 +5,12 @@ const Propertyinfo = () => {
     <div>
       <div className="row mt-3">
         <div className="col-md-5 mb-0">
-          <DragDropFile></DragDropFile>
+          <div className="row h-75">
+            <h1 className="col-form-label mb-1 pt-0">Property Photo</h1>
+            <div className="col h-100">
+              <DragDropFile></DragDropFile>
+            </div>
+          </div>
         </div>
         <div className="col">
           <div className="form-group">
@@ -14,7 +19,10 @@ const Propertyinfo = () => {
             </h1>
             <div className="row mb-3">
               <div className="form-group col">
-                <select name="Property Type" className="form-control">
+                <select
+                  name="Property Type"
+                  className=" form-control form-control-sm form-select pb-0 pt-0"
+                >
                   <option>Select property type</option>
                   <option>Single family home</option>
                   <option>Duplex</option>
@@ -24,7 +32,10 @@ const Propertyinfo = () => {
                 </select>
               </div>
               <div className="form-group col">
-                <select name="Property Type" className="form-control">
+                <select
+                  name="Property Type"
+                  className=" form-control form-control-sm form-select pb-0 pt-0"
+                >
                   <option>Bedrooms</option>
                   <option>1</option>
                   <option>2</option>
@@ -36,7 +47,10 @@ const Propertyinfo = () => {
             </div>
             <div className="row mb-3">
               <div className="form-group col">
-                <select name="Property Type" className="form-control">
+                <select
+                  name="Property Type"
+                  className=" form-control form-control-sm form-select pb-0 pt-0"
+                >
                   <option>Bathrooms</option>
                   <option>1</option>
                   <option>2</option>
@@ -46,15 +60,27 @@ const Propertyinfo = () => {
                 </select>
               </div>
               <div className="form-group col">
-                <input id="Sq.ft" placeholder="Sq. ft" className="form-control" />
+                <input
+                  id="Sq.ft"
+                  placeholder="Sq. ft"
+                  className="form-control"
+                />
               </div>
             </div>
             <div className="row">
               <div className="form-group col">
-                <input id="Lotsize" placeholder="Lot size" className="form-control" />
+                <input
+                  id="Lotsize"
+                  placeholder="Lot size"
+                  className="form-control"
+                />
               </div>
               <div className="form-group col">
-                <input id="Yearbuilt" placeholder="Year built" className="form-control" />
+                <input
+                  id="Yearbuilt"
+                  placeholder="Year built"
+                  className="form-control"
+                />
               </div>
             </div>
           </div>
