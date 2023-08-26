@@ -20,6 +20,13 @@ if (!defined('_S_VERSION')) {
     define('_S_VERSION', '1.0.0');
 }
 
+function add_nav_menus() {
+    register_nav_menus( array(
+        'primary'=>'Navigation Bar'
+    ));
+}
+add_action('init', 'add_nav_menus');
+
 
 if (!function_exists('myfirsttheme_setup')) :
 

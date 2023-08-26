@@ -24,6 +24,14 @@ Text Domain: your-theme-textdomain
     /* Change this value to your desired font color */
 }
 
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+head{
+    font-family: 'Inter', sans-serif;
+}
 body {
     color: var(--global-font-color);
 }
@@ -34,8 +42,4 @@ h1 {
 
 p {
     color: var(--global-font-color);
-}
-
-html {
-    box-sizing: border-box;
 }

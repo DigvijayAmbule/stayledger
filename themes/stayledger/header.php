@@ -23,7 +23,7 @@
 
     </head>
     <body> <!--  style="background: linear-gradient(180deg, rgba(201,227,255,1) 30%, rgba(201,227,255,1) 10%, rgba(255,255,255,1) 100%);"-->
-        <div class="m-4">
+        <div class="m-4 font-fam">
             <nav class="container navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
                     <a href="<?php echo site_url();?>" class="navbar-brand">
@@ -34,6 +34,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
+                        
                         <?php wp_nav_menu(array(
                         'theme-location'=>'primary-menu',
                         // 'container' => 'a',
@@ -58,9 +59,12 @@
                             <a href="#" class="nav-item nav-link">Messages</a>
                             <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a>
                         </div> -->
-                        <div class="navbar-nav ms-auto">
+                        <!-- <li> -->
+                            <button type="button" class="btn contact"> Contact Us</button>
+                        <!-- </li> -->
+                        <!-- <div class="navbar-nav ms-auto">
                             <a href="#" class="nav-item nav-link">Login</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </nav>

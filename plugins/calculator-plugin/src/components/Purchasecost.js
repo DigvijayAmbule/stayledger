@@ -1,36 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Purchasecost = ({
   onPurchasePriceChange,
   onAppraisalFeesChange,
   onSurveysFeesChange,
   onClosingCostsChange,
+  onIsClosingCostsAmmountChange,
 }) => {
   const [purchasePrice, setPurchasePrice] = useState("");
   const [AppraisalFees, setAppraisalFees] = useState("");
   const [SurveysFees, setSurveysFees] = useState("");
   const [ClosingCosts, setClosingCosts] = useState("");
+  const [ClosingCostsInputType, setClosingCostsInputType] = useState(0);
+
+  function handleClosingCostsInputType(e) {
+    onIsClosingCostsAmmountChange(ClosingCostsInputType ? 0 : 1);
+    setClosingCostsInputType(ClosingCostsInputType ? 0 : 1);
+  }
 
   function handlePurchasePrice(e) {
-    const val = e.target.value;
+    const val = e.target.value.replace(/\D/g, "");
     setPurchasePrice(val);
     onPurchasePriceChange(val);
   }
 
   function handleAppraisalFees(e) {
-    const val = e.target.value;
+    const val = e.target.value.replace(/\D/g, "");
     setAppraisalFees(val);
     onAppraisalFeesChange(val);
   }
 
   function handleSurveysFees(e) {
-    const val = e.target.value;
+    const val = e.target.value.replace(/\D/g, "");
     setSurveysFees(val);
     onSurveysFeesChange(val);
   }
 
   function handleClosingCosts(e) {
-    const val = e.target.value;
+    const val = e.target.value.replace(/[^\d.]+|(?<=\..*)\./g, "");
     setClosingCosts(val);
     onClosingCostsChange(val);
   }
@@ -45,7 +52,9 @@ const Purchasecost = ({
       <div>
         <div className="row">
           <div className="col">
-            <label htmlFor="purchasePrice">Purchase price</label>
+            <label className="calculator-label" htmlFor="purchasePrice">
+              Purchase price
+            </label>
             <input
               className="form-control form-control-sm"
               type="text"
@@ -56,7 +65,9 @@ const Purchasecost = ({
             />
           </div>
           <div className="col">
-            <label htmlFor="AppraisalFees">Appraisal fees</label>
+            <label className="calculator-label" htmlFor="AppraisalFees">
+              Appraisal fees
+            </label>
             <input
               className="form-control form-control-sm"
               type="text"
@@ -69,7 +80,9 @@ const Purchasecost = ({
         </div>
         <div className="row">
           <div className="col">
-            <label htmlFor="SurveysFees">Inspection/ surveys fees</label>
+            <label className="calculator-label" htmlFor="SurveysFees">
+              Inspection/ surveys fees
+            </label>
             <input
               className="form-control form-control-sm"
               type="text"
@@ -80,14 +93,31 @@ const Purchasecost = ({
             />
           </div>
           <div className="col">
-            <label htmlFor="PurchaseClosingCosts">Closing costs</label>
+            <div className="row justify-content-between">
+              <label
+                className="col calculator-label"
+                htmlFor="PurchaseClosingCosts"
+              >
+                Closing costs
+              </label>
+              <div className="col form-check form-switch toggle-button-container">
+                <input
+                  value={ClosingCostsInputType}
+                  onChange={handleClosingCostsInputType}
+                  className="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="PurchaseClosingCostsSwitchCheckChecked"
+                />
+              </div>
+            </div>
             <input
               className="form-control form-control-sm"
               type="text"
               id="PurchaseClosingCosts"
               value={ClosingCosts}
               onChange={handleClosingCosts}
-              placeholder="$000,000"
+              placeholder={ClosingCostsInputType ? "$000,000" : "0.0%"}
             />
           </div>
           <small id="passwordHelpBlock" className="form-text text-muted">
