@@ -19,20 +19,3 @@ a{
     padding-top: 1px;
     padding-bottom: 1px;
 }
-
-.call-icon{
-    /* phone-fill */
-    width: 20px;
-    height: 20px;
-    /* Inside auto layout */
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    /* Vector */
-    position: absolute;
-    left: 12.5%;
-    right: 12.5%;
-    top: 12.5%;
-    bottom: 12.5%;
-    background: #1D2939;
-}
