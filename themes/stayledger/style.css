@@ -9,18 +9,29 @@ License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 Text Domain: your-theme-textdomain
 */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @font-face {
-    font-family: 'Montserrat', 'sans-serif';
-    src: url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;700&display=swap');
+    font-family: 'Inter', sans-serif;
+    src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 }
+
+
 
 :root {
     --global-font-color: #2E424D;
     /* Change this value to your desired font color */
 }
 
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+head{
+    font-family: 'Inter', sans-serif;
+}
 body {
     color: var(--global-font-color);
 }
@@ -31,8 +42,4 @@ h1 {
 
 p {
     color: var(--global-font-color);
-}
-
-html {
-    box-sizing: border-box;
 }

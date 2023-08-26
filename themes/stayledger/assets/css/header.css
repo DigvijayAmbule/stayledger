@@ -5,3 +5,17 @@
 .navbar>.container {
     max-width: 75%;
 }
+.font-fam {
+    font-family: 'Inter', sans-serif;
+}
+a{
+    text-decoration: none;
+}
+
+.contact {
+    border:solid 1px;
+    font-size: 16px;
+    background-color: white;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}

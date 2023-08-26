@@ -9,6 +9,9 @@ import Rehabcosts from "./components/Rehabcosts";
 import Sellingcost from "./components/Sellingcost";
 import Financing from "./components/Financing";
 import Calculation from "./components/Calculation";
+import calcultorimage from "./assets/images/calculator.svg";
+
+import "./assets/css/style.css";
 
 const Calculator = () => {
   const [purchasePrice, setPurchasePrice] = useState(0);
@@ -32,6 +35,27 @@ const Calculator = () => {
   const [other, setOther] = useState(0);
   const [irr, setIRR] = useState(0);
   const [FinalPurchasecost, setFinalPurchasecost] = useState(0);
+  const [IsInterestRateAmmount, setIsInterestRateAmmount] = useState(0);
+  const [IsCommissionToAgentsAmmount, setIsCommissionToAgentsAmmount] =
+    useState(0);
+  const [IsSellingClosingCostsAmmount, setIsSellingClosingCostsAmmount] =
+    useState(0);
+  const [IsClosingCostsAmmount, setIsClosingCostsAmmount] = useState(0);
+
+  const handleIsSellingClosingCostsAmmount = (val) => {
+    setIsSellingClosingCostsAmmount(parseFloat(val));
+  };
+  const handleIsCommissionToAgentsAmmount = (val) => {
+    setIsCommissionToAgentsAmmount(parseFloat(val));
+  };
+
+  const handleIsInterestRateAmmount = (val) => {
+    setIsInterestRateAmmount(parseFloat(val));
+  };
+
+  const handleIsClosingCostsAmmount = (val) => {
+    setIsClosingCostsAmmount(parseFloat(val));
+  };
 
   const handlePropertyTaxes = (val) => {
     setPropertyTaxes(parseInt(val));
@@ -107,18 +131,24 @@ const Calculator = () => {
 
   const pPrice = purchasePrice;
 
-  const sellingClosingCosts = SellingClosingCosts;
-  const LoanAmount = loanAmount;
-  const InterestRate = interestRate;
   // Appraisel+Inspecton+(Loan origination costs*Loan ammount)+(Closing costs*Purchase price)
 
   useEffect(() => {
-    setFinalPurchasecost(
-      loanAmount * (loanOriginationCost / 100) +
-        (ClosingCosts / 100) * purchasePrice +
-        SurveysFees +
-        AppraisalFees
-    );
+    if (setIsClosingCostsAmmount) {
+      setFinalPurchasecost(
+        loanAmount * (loanOriginationCost / 100) +
+          ClosingCosts +
+          SurveysFees +
+          AppraisalFees
+      );
+    } else {
+      setFinalPurchasecost(
+        loanAmount * (loanOriginationCost / 100) +
+          (ClosingCosts / 100) * purchasePrice +
+          SurveysFees +
+          AppraisalFees
+      );
+    }
   }, [
     loanAmount,
     loanOriginationCost,
@@ -126,16 +156,48 @@ const Calculator = () => {
     ClosingCosts,
     SurveysFees,
     AppraisalFees,
+    setIsClosingCostsAmmount,
   ]);
+  const [diffDays, setdiffDays] = useState(0);
+  useEffect(() => {
+    let diffTime = Math.abs(endDate - startDate);
+    setdiffDays(Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
+  }, [endDate, startDate]);
 
-  let diffTime = Math.abs(endDate - startDate);
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  const InterestPayments =
-    LoanAmount * ((diffDays + 1) / 365) * (InterestRate / 100);
+  const [InterestPayments, setInterestPayments] = useState(0);
+  useEffect(() => {
+    if (IsInterestRateAmmount) {
+      setInterestPayments(interestRate);
+    } else {
+      setInterestPayments(
+        loanAmount * ((diffDays + 1) / 365) * (interestRate / 100)
+      );
+    }
+  }, [loanAmount, diffDays, interestRate, IsInterestRateAmmount]);
+
   const finalHoldingCost =
     InterestPayments + propertyTaxes + insurance + utilities + other;
-  const finalCommissionToAgents = AfterRepairValue * (CommissionToAgents / 100);
-  const finalClosingCosts = AfterRepairValue * (sellingClosingCosts / 100);
+
+  const [finalCommissionToAgents, setfinalCommissionToAgents] = useState(0);
+
+  useEffect(() => {
+    if (IsCommissionToAgentsAmmount) {
+      setfinalCommissionToAgents(CommissionToAgents);
+    } else {
+      setfinalCommissionToAgents(AfterRepairValue * (CommissionToAgents / 100));
+    }
+  }, [AfterRepairValue, CommissionToAgents, IsCommissionToAgentsAmmount]);
+
+  const [finalClosingCosts, setfinalClosingCosts] = useState(0);
+
+  useEffect(() => {
+    if (IsSellingClosingCostsAmmount) {
+      setfinalClosingCosts(SellingClosingCosts);
+    } else {
+      setfinalClosingCosts(AfterRepairValue * (SellingClosingCosts / 100));
+    }
+  }, [AfterRepairValue, SellingClosingCosts, IsSellingClosingCostsAmmount]);
+
   const finalSellingCost = finalCommissionToAgents + finalClosingCosts;
   const finalRehabCost = Materials + Contractor;
   const finalTotalExpenses =
@@ -262,7 +324,7 @@ const Calculator = () => {
   useEffect(() => {
     const irr = calculateXIRR(cashFlow, dates);
     // const irr = 0;
-    setIRR(irr*100);
+    setIRR(irr * 100);
   }, [
     purchasePrice,
     AppraisalFees,
@@ -287,62 +349,76 @@ const Calculator = () => {
   console.log(irr + "irr");
 
   return (
-    <div className="container">
-      <div className="row ">
-        <div
-          className="col-7 mr-5 border rounded"
-          style={{ background: "rgba(47,43,67,0.1)" }}
-        >
-          <Header></Header>
-          <Propertyaddress></Propertyaddress>
-          <Propertyinfo></Propertyinfo>
-          <Holdingtime
-            onStartDateChange={handleStartDate}
-            onEndDateChange={handleEndDate}
-          ></Holdingtime>
-          <Purchasecost
-            onPurchasePriceChange={handlePurchasePrice}
-            onAppraisalFeesChange={handleAppraisalFees}
-            onSurveysFeesChange={handleSurveysFees}
-            onClosingCostsChange={handleClosingCosts}
-          ></Purchasecost>
-          <Financing
-            onLoanAmountChange={handleLoanAmount}
-            onLoanOriginationCostChange={handleLoanOriginationCost}
-            onInterestRateChange={handleInterestRate}
-          ></Financing>
-          <Rehabcosts
-            onMaterialsChange={handleContractor}
-            onContractorChange={handleMaterials}
-          ></Rehabcosts>
-          <Holdingcosts
-            onPropertyTaxesChange={handlePropertyTaxes}
-            onInsuranceChange={handleInsurance}
-            onUtilitiesChange={handleUtilities}
-            onOtherChange={handleOther}
-          ></Holdingcosts>
-          <Sellingcost
-            onAfterRepairValueChange={handleAfterRepairValue}
-            onCommissionToAgentsChange={handleCommissionToAgents}
-            onSellingClosingCostsChange={handleSellingClosingCosts}
-          ></Sellingcost>
-        </div>
-        <div className="col h-50 border rounded shadow bg-white sticky-top">
-          <Calculation
-            finalProfit={finalProfit}
-            pPrice={pPrice}
-            FinalPurchasecost={FinalPurchasecost}
-            finalRehabCost={finalRehabCost}
-            finalHoldingCost={finalHoldingCost}
-            loanAmount={loanAmount}
-            Out_Of_Pocket_Costs={Out_Of_Pocket_Costs}
-            ROI={ROI}
-            annualROI={annualROI}
-            IRR={irr}
-          ></Calculation>
+    <>
+      <div className="header_container"></div>
+      <div className="container calculator-container">
+        <div className="calculator-header">
+          <div className="calculator-img-container">
+            <img className="calculator-img" src={calcultorimage} />
+          </div>
+
+          <div className="item-1">
+            <Header></Header>
+          </div>
+          <div className="sticky-item item-2">
+            <Calculation
+              finalProfit={finalProfit}
+              pPrice={pPrice}
+              FinalPurchasecost={FinalPurchasecost}
+              finalRehabCost={finalRehabCost}
+              finalHoldingCost={finalHoldingCost}
+              loanAmount={loanAmount}
+              Out_Of_Pocket_Costs={Out_Of_Pocket_Costs}
+              ROI={ROI}
+              annualROI={annualROI}
+              IRR={irr}
+            ></Calculation>
+          </div>
+          <div className="item-3">
+            <Propertyaddress></Propertyaddress>
+            <Propertyinfo></Propertyinfo>
+            <Holdingtime
+              onStartDateChange={handleStartDate}
+              onEndDateChange={handleEndDate}
+            ></Holdingtime>
+            <Purchasecost
+              onPurchasePriceChange={handlePurchasePrice}
+              onAppraisalFeesChange={handleAppraisalFees}
+              onSurveysFeesChange={handleSurveysFees}
+              onClosingCostsChange={handleClosingCosts}
+              onIsClosingCostsAmmountChange={handleIsClosingCostsAmmount}
+            ></Purchasecost>
+            <Financing
+              onLoanAmountChange={handleLoanAmount}
+              onLoanOriginationCostChange={handleLoanOriginationCost}
+              onInterestRateChange={handleInterestRate}
+              onIsInterestRateAmmountChange={handleIsInterestRateAmmount}
+            ></Financing>
+            <Rehabcosts
+              onMaterialsChange={handleContractor}
+              onContractorChange={handleMaterials}
+            ></Rehabcosts>
+            <Holdingcosts
+              onPropertyTaxesChange={handlePropertyTaxes}
+              onInsuranceChange={handleInsurance}
+              onUtilitiesChange={handleUtilities}
+              onOtherChange={handleOther}
+            ></Holdingcosts>
+            <Sellingcost
+              onAfterRepairValueChange={handleAfterRepairValue}
+              onCommissionToAgentsChange={handleCommissionToAgents}
+              onSellingClosingCostsChange={handleSellingClosingCosts}
+              onIsSellingClosingCostsAmmountChange={
+                handleIsSellingClosingCostsAmmount
+              }
+              onIsCommissionToAgentsAmmountChange={
+                handleIsCommissionToAgentsAmmount
+              }
+            ></Sellingcost>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

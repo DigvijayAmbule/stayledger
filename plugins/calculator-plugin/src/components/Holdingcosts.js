@@ -12,25 +12,25 @@ const Holdingcosts = ({
   const [other, setOther] = useState("");
 
   function handlePropertyTaxes(e) {
-    const val = e.target.value;
+    const val = e.target.value.replace(/\D/g, "");
     setPropertyTaxes(val);
     onPropertyTaxesChange(val);
   }
 
   function handleInsurance(e) {
-    const val = e.target.value;
+    const val = e.target.value.replace(/\D/g, "");
     setInsurance(val);
     onInsuranceChange(val);
   }
 
   function handleUtilities(e) {
-    const val = e.target.value;
+    const val = e.target.value.replace(/\D/g, "");
     setUtilities(val);
     onUtilitiesChange(val);
   }
 
   function handleOther(e) {
-    const val = e.target.value;
+    const val = e.target.value.replace(/\D/g, "");
     setOther(val);
     onOtherChange(val);
   }
@@ -39,13 +39,15 @@ const Holdingcosts = ({
     <div>
       <div className="form-group">
         <h1 htmlFor="HoldingCosts" className="col-form-label mb-1 mt-2">
-        Holding Costs
+          Holding Costs
         </h1>
       </div>
       <div>
         <div className="row">
           <div className="col">
-            <label htmlFor="">Property taxes</label>
+            <label className="calculator-label" htmlFor="PropertyTaxes">
+              Property taxes
+            </label>
             <input
               type="text"
               id="PropertyTaxes"
@@ -57,7 +59,9 @@ const Holdingcosts = ({
           </div>
 
           <div className="col">
-            <label htmlFor="">Insurance</label>
+            <label className="calculator-label" htmlFor="Insurance">
+              Insurance
+            </label>
             <input
               type="text"
               id="Insurance"
@@ -70,7 +74,9 @@ const Holdingcosts = ({
         </div>
         <div className="row">
           <div className="col">
-            <label htmlFor="">Utilities</label>
+            <label className="calculator-label" htmlFor="Utilities">
+              Utilities
+            </label>
             <input
               type="text"
               id="Utilities"
@@ -82,7 +88,9 @@ const Holdingcosts = ({
           </div>
 
           <div className="col">
-            <label htmlFor="">Other</label>
+            <label className="calculator-label" htmlFor="Other">
+              Other
+            </label>
             <input
               type="text"
               id="Other"

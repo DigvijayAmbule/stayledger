@@ -1,4 +1,5 @@
 import React from "react";
+import "../assets/css/style.css";
 
 const Calculation = ({
   finalProfit,
@@ -14,150 +15,99 @@ const Calculation = ({
 }) => {
   return (
     <>
-      <div className="row">
-        <div className="col text-center">
-          <h3 className="sub-title">Gross Profit</h3>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col text-center">
-          <h3 className="sub-title">
-            ${finalProfit ? finalProfit.toFixed(2) : "0000"}
-          </h3>
-        </div>
-      </div>
+      <div className="card-calculation">
+        <h1 className="card-title">Gross Profit</h1>
+        <select
+          className="form-select card-dropdown home-select"
+          aria-label="Default select example"
+        >
+          <option value="0">Home 1</option>
+          <option value="1">Home 2</option>
+          <option value="2">Home 3</option>
+        </select>
+        <p className="card-output">
+          ${finalProfit ? finalProfit.toFixed(0) : "000,000"}
+        </p>
+        <div className="calculation-container">
+          <div className="calculation">
+            <p className="calculation-title">Expenses</p>
+            <div className="calculation-box">
+              <div className="result1">
+                <p className="calculation-row-title">Purchase price</p>
+                <p className="value">
+                  {" "}
+                  ${pPrice ? pPrice.toFixed(0) : "000,000"}
+                </p>
+              </div>
+              <div className="result1">
+                <p className="calculation-row-title">Purchase cost</p>
+                <p className="value">
+                  $
+                  {FinalPurchasecost ? FinalPurchasecost.toFixed(0) : "000,000"}
+                </p>
+              </div>
+              <div className="result1">
+                <p className="calculation-row-title">Rehab cost</p>
+                <p className="value">
+                  ${finalRehabCost ? finalRehabCost.toFixed(0) : "000,000"}
+                </p>
+              </div>
+              <div className="result1">
+                <p className="calculation-row-title">Holding cost</p>
+                <p className="value">
+                  ${finalHoldingCost ? finalHoldingCost.toFixed(0) : "000,000"}
+                </p>
+              </div>
 
-      <div className="row">
-        <div className="col text-center">
-          <h3 className="sub-title">Expenses</h3>
-        </div>
-        <div className="col text-center">
-          <h3 className="sub-title">Deal Outlook</h3>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
-          <div className="row">
-            <div className="col">
-              <h6>Purchase price</h6>
+              <div className="result1">
+                <p className="calculation-row-title">Loan Amount</p>
+                <p className="value">
+                  {" "}
+                  ${loanAmount ? loanAmount.toFixed(0) : "000,000"}
+                </p>
+              </div>
+              <div className="result1">
+                <p className="calculation-row-title">Out Of Pocket Costs</p>
+                <p className="value">
+                  {" "}
+                  $
+                  {Out_Of_Pocket_Costs
+                    ? Out_Of_Pocket_Costs.toFixed(0)
+                    : "000,000"}
+                </p>
+              </div>
             </div>
-            <div className="col">
-              <h6>${pPrice ? pPrice : "0000"}</h6>
+          </div>
+          <div className="calculation">
+            <p className="calculation-title">Deal Outlook</p>
+            <div className="calculation-box">
+              <div className="result1">
+                <p className="calculation-row-title">ROI</p>
+                <p className="value">{ROI ? ROI.toFixed(2) : "00.00"}%</p>
+              </div>
+              <div className="result1">
+                <p className="calculation-row-title">Annualised ROI</p>
+                <p className="value">
+                  {" "}
+                  {annualROI ? annualROI.toFixed(2) : "00.00"}%
+                </p>
+              </div>
+              <div className="result1">
+                <p className="calculation-row-title">IRR</p>
+                <p className="value">{IRR ? IRR.toFixed(2) : "00.00"}%</p>
+              </div>
             </div>
           </div>
         </div>
-        <div className="col">
-          <div className="row">
-            <div className="col">
-              <h6>ROI</h6>
-            </div>
-            <div className="col">
-              <h6>{ROI ? ROI.toFixed(2) : "00.00"}%</h6>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
-          <div className="row">
-            <div className="col">
-              <h6>Purchase cost</h6>
-            </div>
-            <div className="col">
-              <h6>${FinalPurchasecost ? FinalPurchasecost : "0000"}</h6>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="row">
-            <div className="col">
-              <h6>Annualised ROI</h6>
-            </div>
-            <div className="col">
-              <h6>{annualROI ? annualROI.toFixed(2) : "00.00"}%</h6>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
-          <div className="row">
-            <div className="col">
-              <h6>Rehab cost</h6>
-            </div>
-            <div className="col">
-              <h6>${finalRehabCost ? finalRehabCost : "0000"}</h6>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="row">
-            <div className="col">
-              <h6>IRR</h6>
-            </div>
-            <div className="col">
-              <h6>{IRR ? IRR.toFixed(2) : "00.00"}%</h6>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
-          <div className="row">
-            <div className="col">
-              <h6>Holding cost</h6>
-            </div>
-            <div className="col">
-              <h6>
-                ${finalHoldingCost ? finalHoldingCost.toFixed(2) : "0000"}
-              </h6>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="row">
-            <div className="col"></div>
-            <div className="col"></div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
-          <div className="row">
-            <div className="col">
-              <h6>Loan Amount</h6>
-            </div>
-            <div className="col">
-              <h6>${loanAmount ? loanAmount : "0000"}</h6>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="row">
-            <div className="col"></div>
-            <div className="col"></div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
-          <div className="row">
-            <div className="col">
-              <h6>Out Of Pocket Costs</h6>
-            </div>
-            <div className="col">
-              <h6>
-                ${Out_Of_Pocket_Costs ? Out_Of_Pocket_Costs.toFixed(2) : "0000"}
-              </h6>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="row">
-            <div className="col"></div>
-            <div className="col"></div>
-          </div>
-        </div>
+        <button type="button" className="btn w-100 calculator-btn-primary">
+          Save & Share deals
+        </button>
+        <button
+          type="button"
+          className="btn w-100 btn-outlined calculator-btn-secondary"
+        >
+          Create a new deal
+        </button>
       </div>
     </>
   );

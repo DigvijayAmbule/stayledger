@@ -1,32 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 const Holdingtime = ({ onStartDateChange, onEndDateChange }) => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  const ExampleCustomInput = forwardRef(({ value, onClick, onChange }, ref) => (
+    <input
+      placeholder="Select Date"
+      value={value}
+      className="example-custom-input form-control form-control-sm"
+      onClick={onClick}
+      onChange={onChange}
+      ref={ref}
+    ></input>
+  ));
 
   return (
     <div>
       <div className="form-group">
-        <h1 htmlFor="inputAddress" className="col-form-label mb-1 mt-2">
+        <h1 htmlFor="HoldTime" className="col-form-label mb-1 mt-2">
           Hold Time
         </h1>
-        <p className="mb-1">Start date of loan / Payoff date of loan</p>
+        <p className="mb-1 calculator-label">
+          Start date of loan / Payoff date of loan
+        </p>
       </div>
       <div className="row">
-        <div className="form-group col">
+        <div className="form-group col-sm-3">
           <DatePicker
+            placeholder="Select date"
             selected={startDate}
             className="form-control form-control-sm"
+            customInput={<ExampleCustomInput />}
+            // dayClassName={() => "example-datepicker-day-class"}
+            popperClassName="example-datepicker-class "
             onChange={(date) => {
               setStartDate(date);
               onStartDateChange(date);
             }}
           />
         </div>
-        <div className="form-group col">
+        <div className="form-group col-sm-3">
           <DatePicker
+            customInput={<ExampleCustomInput />}
+            // dayClassName={() => "example-datepicker-day-class"}
+            popperClassName="example-datepicker-class "
             selected={endDate}
             className="form-control form-control-sm"
             onChange={(date) => {

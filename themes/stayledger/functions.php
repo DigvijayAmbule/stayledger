@@ -20,6 +20,21 @@ if (!defined('_S_VERSION')) {
     define('_S_VERSION', '1.0.0');
 }
 
+function add_nav_menus() {
+    register_nav_menus( array(
+        'primary'=>'Navigation Bar'
+    ));
+}
+add_action('init', 'add_nav_menus');
+
+add_filter('nav_menu_css_class' , 'special_nav_class' , 10 , 2);
+
+function special_nav_class ($classes, $item) {
+  if (in_array('current-menu-item', $classes) ){
+    $classes[] = 'active ';
+  }
+  return $classes;
+}
 
 if (!function_exists('myfirsttheme_setup')) :
 
@@ -72,6 +87,18 @@ function stayledger_enqueue_scripts()
     wp_enqueue_style('stayledger-header', get_template_directory_uri() . '/assets/css/header.css');
     wp_enqueue_style('stayledger-body   ', get_template_directory_uri() . '/assets/css/body.css');
     wp_enqueue_style('stayledger-footer   ', get_template_directory_uri() . '/assets/css/footer.css');
-    wp_enqueue_style('stayledger-footer   ', get_template_directory_uri() . '/assets/css/calculator.css');
+    wp_enqueue_style('stayledger-calculator   ', get_template_directory_uri() . '/assets/css/calculator.css');
 }
 add_action('wp_enqueue_scripts', 'stayledger_enqueue_scripts');
+
+
+function add_additional_class_on_li($classes, $items, $args) {
+    if(isset($args->add_li_class)){
+        $classes[] = $args->add_li_class;
+    }
+    return $classes;
+}
+
+add_filter('nav_menu_css_class', 'add_additional_class_on_li', 1, 3)
+
+?>

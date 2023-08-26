@@ -24,12 +24,13 @@ const Propertyaddress = () => {
     setCity(val);
   }
   return (
-    <>
+    <div>
       <div className="form-group">
         <h1 htmlFor="inputAddress" className="col-form-label mb-1 mt-2">
           Property Address
         </h1>
         <input
+          id="inputAddress"
           placeholder="Enter Address"
           value={address}
           onChange={handleAddress}
@@ -41,6 +42,7 @@ const Propertyaddress = () => {
         <div className="form-group col">
           <input
             placeholder="city"
+            id="city"
             value={city}
             onChange={handleCity}
             className="form-control form-control-sm"
@@ -52,9 +54,12 @@ const Propertyaddress = () => {
             value={usStates}
             onChange={handleUsStates}
             id="us-states"
-            className="form-control form-control-sm"
+            className="form-control form-control-sm form-select pt-0 pb-0"
+            aria-label="Default select example"
           >
-            <option value="">Select a state</option>
+            <option value="" className="selected disabled">
+              Select a state
+            </option>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
             <option value="AZ">Arizona</option>
@@ -109,6 +114,7 @@ const Propertyaddress = () => {
         </div>
         <div className="form-group col">
           <input
+            id="zipcode"
             value={zipcode}
             onChange={handleZipcode}
             placeholder="zipcode"
@@ -116,7 +122,7 @@ const Propertyaddress = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
