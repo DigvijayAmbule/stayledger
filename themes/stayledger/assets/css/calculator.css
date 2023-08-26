@@ -1,3 +1,73 @@
+.example-custom-input {
+  background: url("../images/calendar.svg") no-repeat left;
+  background-size: 20px;
+  background-position-x: 8px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.example-custom-input:focus-visible {
+  outline: none;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range,
+.react-datepicker__month-text--selected,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--selected,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--selected,
+.react-datepicker__year-text--in-selecting-range,
+.react-datepicker__year-text--in-range,
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__month-text--keyboard-selected,
+.react-datepicker__quarter-text--keyboard-selected,
+.react-datepicker__year-text--keyboard-selected {
+  border-radius: 50%;
+  margin: 0.066rem;
+}
+
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--in-selecting-range:hover,
+.react-datepicker__day--in-range:hover,
+.react-datepicker__month-text--selected:hover,
+.react-datepicker__month-text--in-selecting-range:hover,
+.react-datepicker__month-text--in-range:hover,
+.react-datepicker__quarter-text--selected:hover,
+.react-datepicker__quarter-text--in-selecting-range:hover,
+.react-datepicker__quarter-text--in-range:hover,
+.react-datepicker__year-text--selected:hover,
+.react-datepicker__year-text--in-selecting-range:hover,
+.react-datepicker__year-text--in-range:hover,
+.react-datepicker__day--keyboard-selected:hover,
+.react-datepicker__month-text--keyboard-selected:hover,
+.react-datepicker__quarter-text--keyboard-selected:hover,
+.react-datepicker__year-text--keyboard-selected:hover,
+.react-datepicker__day--keyboard-selected:hover,
+.react-datepicker__month-text--keyboard-selected:hover,
+.react-datepicker__quarter-text--keyboard-selected:hover,
+.react-datepicker__year-text--keyboard-selected:hover {
+  border-radius: 50%;
+}
+
+.react-datepicker__day:hover,
+.react-datepicker__month-text:hover,
+.react-datepicker__quarter-text:hover,
+.react-datepicker__year-text:hover {
+  border-radius: 50%;
+}
+
+.example-datepicker-class .react-datepicker__today-button {
+  background-color: white;
+  border-top: 0px;
+  text-align: right;
+  margin-right: 20px;
+}
+
+
 .header_container {
   height: 100vh;
   position: absolute;
@@ -10,11 +80,45 @@
 }
 
 .main-title {
-  font-size: 3.6rem;
+  font-size: 4.5rem;
   line-height: 1;
-  font-size: 800;
+  font-weight: 800;
   letter-spacing: .1rem;
   margin-bottom: 2rem;
+}
+
+.sub-title {
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+.avatars {
+  display: inline-flex;
+  flex-direction: row;
+
+}
+
+.avatar {
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 32px;
+}
+
+.avatar:not(:last-child) {
+  margin-left: -10px;
+}
+
+.avatar img {
+  width: 100%;
+  display: block;
+}
+
+.avatar-text {
+  margin-left: 12px;
+  font-size: 14px;
+  margin-bottom: 0;
+  align-self: center;
 }
 
 .calc_output_title {
@@ -51,22 +155,43 @@
 
 .calculator-header {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 60% 40%;
   max-width: 100%;
-  justify-content: space-between;
+  /* justify-items: center;
+  justify-content: space-between; */
   row-gap: 1rem;
   column-gap: 2rem;
   margin-bottom: 3rem;
 }
 
+.calculator-img-container {
+  position: absolute;
+  height: 250vh;
+  width: 90%;
+  display: flex;
+  align-items: baseline;
+  justify-content: end;
+}
+
+.calculator-img {
+  display: inline-block;
+  width: 18%;
+  position: sticky;
+  top: 0;
+  right: 3rem;
+  z-index: 2;
+  transform: translateY(-78px);
+}
+
 .item-1 {
-  max-width: 100%;
+  max-width: 80%;
+  justify-self: flex-start;
 }
 
 .item-2 {
-  max-width: 75%;
-  justify-self: end;
-  padding: 1rem 1.2rem;
+  max-width: 100%;
+  justify-self: auto;
+  padding: 2rem 2rem;
   box-shadow: 0 9px 18px 0 rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(47, 43, 67, 0.1);
 }
@@ -75,10 +200,11 @@
   background-color: rgba(175, 171, 171, 0.1);
   padding: 1rem 1.2rem;
   border: 1px solid rgba(47, 43, 67, 0.1);
-  grid-column: 1 / 3;
-  max-width: 60%;
+  grid-column: 1 / 2;
+  max-width: 100%;
   border-radius: 1rem;
-  justify-self: start;
+  justify-self: flex-start;
+  z-index: 5;
 }
 
 .sticky-item {
@@ -89,48 +215,161 @@
   z-index: 1;
 }
 
-
-
-@media only screen and (max-width: 1000px) {
-  .container {
-    max-width: 80%;
-  }
-
-  .calc_output_value_ter {
-    text-align: center;
-  }
-
-  .calculator-header {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    max-width: 100%;
-  }
-
-  .item-1 {
-    grid-column: 1 / 2;
-    text-align: center;
-  }
-
-
-  .item-2 {
-    grid-column: 1 / 2;
-    padding: 1rem 1.2rem;
-    justify-self: auto;
-    max-width: 100%;
-  }
-
-  .item-3 {
-    grid-column: 1 / 2;
-    max-width: 100%;
-  }
-
+.container {
+  max-width: 90%;
 
 }
 
+.calculator-container {
+  margin-top: 4rem;
+}
+
+.toggle-button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 2rem;
+}
+
+.calculator-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #344054;
+  margin-bottom: 0.3rem;
+}
+
+.form-check-input::before {
+  content: '%';
+  position: relative;
+  left: -1.5rem;
+  top: -0.3rem;
+  font-size: 14px;
+}
+
+.form-check-input::after {
+  content: '$';
+  position: relative;
+  right: -1.7rem;
+  top: -0.3rem;
+  font-size: 14px;
+}
+
+.card-calculation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-title {
+  align-self: flex-start;
+  font-size: 1.2rem;
+}
+
+.card-dropdown {
+  align-self: flex-end;
+  font-size: 14px;
+  max-width: 25%;
+}
+
+.card-output {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.calculation-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  gap: 3rem;
+}
+
+.calculation {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.calculation-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.result1 {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.calculator-btn-primary {
+  margin-top: 2rem;
+  font-size: 16px;
+  line-height: 1rem;
+  letter-spacing: 1;
+  background-color: #7F56D9;
+  color: #fff;
+  border-radius: 1rem;
+  height: 3rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.calculator-btn-primary:hover {
+  border: 1px solid rgba(123, 82, 210, 0.1);
+  background-color: #7b52d2;
+  color: #fff;
+}
+
+.calculator-btn-secondary {
+  margin-top: 1rem;
+  border-radius: 1rem;
+  height: 3rem;
+  font-size: 16px;
+  line-height: 1rem;
+  letter-spacing: 1;
+}
+
+.btn-outlined {
+  border: 1px solid rgba(47, 43, 67, 0.1);
+  transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.btn-outlined:hover {
+  box-shadow: 0 2px 2px 0 rgba(123, 82, 210, 0.1);
+  ;
+  border: 2px solid rgba(123, 82, 210, 0.1);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.home-select {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.calculation-title {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.calculation-row-title {
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-block;
+  text-align: left;
+  width: 100px;
+  margin: 0;
+}
+
+.value {
+  font-size: 14px;
+  margin-bottom: .2rem;
+}
+
+
+
 @media only screen and (max-width: 764px) {
   .container {
-    max-width: 75%;
+    max-width: 100%;
   }
 
   .calculator-header {
