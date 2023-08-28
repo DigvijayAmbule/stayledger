@@ -23,7 +23,7 @@ const Propertyinfo = () => {
                   name="Property Type"
                   className=" form-control form-control-sm form-select pb-0 pt-0 mb-2"
                 >
-                  <option>Select property type</option>
+                  <option>Property type</option>
                   <option>Single family home</option>
                   <option>Duplex</option>
                   <option>Tri-plex</option>

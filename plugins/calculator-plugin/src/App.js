@@ -450,8 +450,11 @@ const Calculator = () => {
                 handleIsCommissionToAgentsAmmount
               }
             ></Sellingcost>
-            <div className="calulator-btn">
-              <button type="button" className="btn w-75 calculator-btn-primary">
+            <div className="calulator-btn col col-md-9 mx-auto mb-2">
+              <button
+                type="button"
+                className="btn w-100 calculator-btn-primary"
+              >
                 Run Another Scenario
               </button>
             </div>
