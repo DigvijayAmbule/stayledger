@@ -88,6 +88,7 @@ function stayledger_enqueue_scripts()
     wp_enqueue_style('stayledger-body   ', get_template_directory_uri() . '/assets/css/body.css');
     wp_enqueue_style('stayledger-footer   ', get_template_directory_uri() . '/assets/css/footer.css');
     wp_enqueue_style('stayledger-calculator   ', get_template_directory_uri() . '/assets/css/calculator.css');
+    wp_enqueue_style('stayledger-home   ', get_template_directory_uri() . '/assets/css/home.css');
 }
 add_action('wp_enqueue_scripts', 'stayledger_enqueue_scripts');
 
