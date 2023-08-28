@@ -10,7 +10,7 @@ const Holdingtime = ({ onStartDateChange, onEndDateChange }) => {
     <input
       placeholder="Select Date"
       value={value}
-      className="example-custom-input form-control form-control-sm"
+      className="example-custom-input form-control form-control-sm mb-1"
       onClick={onClick}
       onChange={onChange}
       ref={ref}
@@ -20,7 +20,7 @@ const Holdingtime = ({ onStartDateChange, onEndDateChange }) => {
   return (
     <div>
       <div className="form-group">
-        <h1 htmlFor="HoldTime" className="col-form-label mb-1 mt-2">
+        <h1 htmlFor="HoldTime" className="col-form-label mb-1">
           Hold Time
         </h1>
         <p className="mb-1 calculator-label">
@@ -28,11 +28,11 @@ const Holdingtime = ({ onStartDateChange, onEndDateChange }) => {
         </p>
       </div>
       <div className="row">
-        <div className="form-group col-sm-3">
+        <div className="col-sm-3 w-50 mb-0">
           <DatePicker
             placeholder="Select date"
             selected={startDate}
-            className="form-control form-control-sm"
+            className="form-control form-control-sm mb-1"
             customInput={<ExampleCustomInput />}
             // dayClassName={() => "example-datepicker-day-class"}
             popperClassName="example-datepicker-class "
@@ -42,13 +42,13 @@ const Holdingtime = ({ onStartDateChange, onEndDateChange }) => {
             }}
           />
         </div>
-        <div className="form-group col-sm-3">
+        <div className="col-sm-3 w-50 mb-0">
           <DatePicker
             customInput={<ExampleCustomInput />}
             // dayClassName={() => "example-datepicker-day-class"}
             popperClassName="example-datepicker-class "
             selected={endDate}
-            className="form-control form-control-sm"
+            className="form-control form-control-sm mb-1"
             onChange={(date) => {
               setEndDate(date);
               onEndDateChange(date);

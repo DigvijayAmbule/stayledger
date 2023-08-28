@@ -26,7 +26,7 @@ const Propertyaddress = () => {
   return (
     <div>
       <div className="form-group">
-        <h1 htmlFor="inputAddress" className="col-form-label mb-1 mt-2">
+        <h1 htmlFor="inputAddress" className="col-form-label mb-0 mt-2">
           Property Address
         </h1>
         <input
@@ -38,8 +38,8 @@ const Propertyaddress = () => {
         />
       </div>
 
-      <div className="row mt-2">
-        <div className="form-group col">
+      <div className="row mt-2 mb-0">
+        <div className="form-group col-md-4 col-sm-12 mb-1">
           <input
             placeholder="city"
             id="city"
@@ -48,7 +48,7 @@ const Propertyaddress = () => {
             className="form-control form-control-sm"
           />
         </div>
-        <div className="form-group col">
+        <div className="form-group col-md-4 col-6 mb-1">
           <select
             name="us-states"
             value={usStates}
@@ -112,7 +112,7 @@ const Propertyaddress = () => {
             <option value="WY">Wyoming</option>
           </select>
         </div>
-        <div className="form-group col">
+        <div className="form-group col-md-4 col-6 mb-1">
           <input
             id="zipcode"
             value={zipcode}

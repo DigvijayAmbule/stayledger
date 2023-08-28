@@ -13,6 +13,13 @@ const Purchasecost = ({
   const [ClosingCosts, setClosingCosts] = useState("");
   const [ClosingCostsInputType, setClosingCostsInputType] = useState(0);
 
+  const formatNumber = (value) => {
+    // Remove existing commas and convert to a number
+    const numericValue = parseFloat(value.replace(/,/g, ""));
+
+    // Format the number with commas
+    return numericValue.toLocaleString("en-US");
+  };
   function handleClosingCostsInputType(e) {
     onIsClosingCostsAmmountChange(ClosingCostsInputType ? 0 : 1);
     setClosingCostsInputType(ClosingCostsInputType ? 0 : 1);
@@ -20,26 +27,31 @@ const Purchasecost = ({
 
   function handlePurchasePrice(e) {
     const val = e.target.value.replace(/\D/g, "");
-    setPurchasePrice(val);
-    onPurchasePriceChange(val);
+    setPurchasePrice(val ? formatNumber(val) : "");
+    onPurchasePriceChange(val.replace(/,/g, ""));
   }
 
   function handleAppraisalFees(e) {
     const val = e.target.value.replace(/\D/g, "");
-    setAppraisalFees(val);
-    onAppraisalFeesChange(val);
+    setAppraisalFees(val ? formatNumber(val) : "");
+    onAppraisalFeesChange(val.replace(/,/g, ""));
   }
 
   function handleSurveysFees(e) {
     const val = e.target.value.replace(/\D/g, "");
-    setSurveysFees(val);
-    onSurveysFeesChange(val);
+    setSurveysFees(val ? formatNumber(val) : "");
+    onSurveysFeesChange(val.replace(/,/g, ""));
   }
 
   function handleClosingCosts(e) {
     const val = e.target.value.replace(/[^\d.]+|(?<=\..*)\./g, "");
-    setClosingCosts(val);
-    onClosingCostsChange(val);
+    if (ClosingCostsInputType) {
+      setClosingCosts(val ? formatNumber(val) : "");
+      onClosingCostsChange(val.replace(/,/g, ""));
+    } else {
+      setClosingCosts(val);
+      onClosingCostsChange(val);
+    }
   }
 
   return (
@@ -51,12 +63,12 @@ const Purchasecost = ({
       </div>
       <div>
         <div className="row">
-          <div className="col">
+          <div className="col-md-6 col-sm-12 mb-0">
             <label className="calculator-label" htmlFor="purchasePrice">
               Purchase price
             </label>
             <input
-              className="form-control form-control-sm"
+              className="form-control form-control-sm mb-1"
               type="text"
               id="purchasePrice"
               value={purchasePrice}
@@ -64,12 +76,12 @@ const Purchasecost = ({
               placeholder="$000,000"
             />
           </div>
-          <div className="col">
+          <div className="col-md-6 col-sm-12 mb-0">
             <label className="calculator-label" htmlFor="AppraisalFees">
               Appraisal fees
             </label>
             <input
-              className="form-control form-control-sm"
+              className="form-control form-control-sm mb-1"
               type="text"
               id="AppraisalFees"
               value={AppraisalFees}
@@ -79,12 +91,12 @@ const Purchasecost = ({
           </div>
         </div>
         <div className="row">
-          <div className="col">
+          <div className="col-md-6 col-sm-12 mb-0">
             <label className="calculator-label" htmlFor="SurveysFees">
               Inspection/ surveys fees
             </label>
             <input
-              className="form-control form-control-sm"
+              className="form-control form-control-sm mb-1"
               type="text"
               id="SurveysFees"
               value={SurveysFees}
@@ -92,7 +104,7 @@ const Purchasecost = ({
               placeholder="$000,000"
             />
           </div>
-          <div className="col">
+          <div className="col-md-6 col-sm-12 mb-0">
             <div className="row justify-content-between">
               <label
                 className="col calculator-label"
@@ -112,7 +124,7 @@ const Purchasecost = ({
               </div>
             </div>
             <input
-              className="form-control form-control-sm"
+              className="form-control form-control-sm mb-1"
               type="text"
               id="PurchaseClosingCosts"
               value={ClosingCosts}
