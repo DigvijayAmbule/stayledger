@@ -1,22 +1,86 @@
-<?php
-    wp_footer();
-?> 
-
-<div class="footer">
-    <div class="container">
-        <section style="border-radius:5px;padding: 40px 10px 10px 10px;margin-bottom:5rem">
-            <div style="text-align:center">
-                <h1>Not Sure Where to Start? Contact Us</h1>
-                <p>Contact us</p>
-                <button type="button" style="border:solid 1px;" class="btn"> Contact Us</button>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="<?php echo get_template_directory_uri()?>/assets/css/footer.css"> -->
+    <?php wp_footer(); ?>
+</head>
+<body>
+    <div class="font-fam">
+        <div class="sec1">
+            <div class="container">
+                <div class="row top-space text-sm-start text-center">
+                    <div class="col-sm-6">
+                        <p class="main-text">NOT SURE WERE TO START? CONTACT US!</p>
+                        <p class="subtext">Get a summary of what we’ve shipped during the last month, behind the scenes updates, and team picks.</p>
+                    </div>
+                    <div class="col-sm-6 d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" style="border-radius:12px;background-color:#7F56D9;color:#FFFFFF;" class="btn btn-foot"> Contact Us</button>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
+        <div class="sec2">
+        <div class="container">
+            <!-- <div class="container"> -->
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col">
+                            <ul class="ul-decor">
+                                <li>
+                                    <a href="#"><img width="25px" height="25px" src="<?php echo get_template_directory_uri()?>/assets/images/logo.svg"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <ul class="ul-decor">
+                                <li class="title">Products</li>
+                                <li>Get Started For Free</li>
+                                <li>Fix & Flip</li>
+                                <li>Testimonials</li>
+                            </ul>    
+                        </div>
+                        <div class="col-sm-4">
+                        <ul class="ul-decor">
+                            <li class="title">Company</li>
+                            <li>Become an Author</li>
+                            <li>Affiliate</li>
+                            <li>About us of use</li>
+                            <li>Contact us</li>
+                            <li>Blog</li>
+                        </ul>  
+                        </div>
+                        <div class="col-sm-4">
+                        <ul class="ul-decor">
+                            <li class="title">Info</li>
+                            <li>License</li>
+                            <li>Cookies</li>
+                            <li>Terms of use</li>
+                            <li>Privacy</li>
+                            <li>F.A.Q.</li>
+                        </ul> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="section3">
+            <div class="container">
+                <div class="row">
+                    <div class="bottom-space col-sm-6">Stayledger. All right reserved. © 2023</div>
+                    <div class="bottom-space col-sm-6 gap-2 d-md-flex justify-content-md-end">
+                        <a href="#"><img width="25px" height="25px" src="<?php echo get_template_directory_uri()?>/assets/images/fb.svg"></a>
+                        <a href="#"><img width="25px" height="25px" src="<?php echo get_template_directory_uri()?>/assets/images/twitter.svg"></a>
+                        <a href="#"><img width="25px" height="25px" src="<?php echo get_template_directory_uri()?>/assets/images/git.svg"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<div class="task-footer">
-    <div class="container">
-    2023 StayLedger.com 
-    <a href="#">Terms of Service</a> &nbsp&nbsp<a href="#">Privacy Policy</a>
-    </div>
-
-</div>
+</body>
+</html>

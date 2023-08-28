@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@font-face {
+    font-family: 'Inter', sans-serif;
+    src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+}
 .nav li {
     margin: 0px 20px;
 }
@@ -5,17 +11,57 @@
 .navbar>.container {
     max-width: 75%;
 }
+
 .font-fam {
     font-family: 'Inter', sans-serif;
 }
-a{
-    text-decoration: none;
+
+.brand {
+    margin-right: 5px;
 }
 
-.contact {
-    border:solid 1px;
+.logo-text {
+    margin-top: revert;
+    /* margin-bottom: 1rem; */
+}
+.brand-logo {
+    /* font-family: 'Inter', sans-serif; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+.hamburger-button {
+    border: none;
+    margin-left: 10px;
+
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none;
+    box-shadow: none;
+}
+.nav-menu-bar a {
     font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #344054;
+}
+
+.active a {
+    color: #6941C6;
+}
+
+.contact-us {
+    font-size: 16px;
+    font-weight: 600;
     background-color: white;
-    padding-top: 1px;
-    padding-bottom: 1px;
+    padding: 1px 2px 1px 2px;
+    margin-left: 8px;
+    outline: none;
 }
