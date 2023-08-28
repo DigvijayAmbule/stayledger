@@ -10,7 +10,13 @@ const Financing = ({
   const [loanOriginationCost, setLoanOriginationCost] = useState("");
   const [interestRate, setInterestRate] = useState("");
   const [interestRateInputType, setInterestRateInputType] = useState(0);
+  const formatNumber = (value) => {
+    // Remove existing commas and convert to a number
+    const numericValue = parseFloat(value.replace(/,/g, ""));
 
+    // Format the number with commas
+    return numericValue.toLocaleString("en-US");
+  };
   function handleInterestRateInputType(e) {
     onIsInterestRateAmmountChange(interestRateInputType ? 0 : 1);
     setInterestRateInputType(interestRateInputType ? 0 : 1);
@@ -18,20 +24,25 @@ const Financing = ({
 
   function handleLoanAmount(e) {
     const val = e.target.value.replace(/\D/g, "");
-    setLoanAmount(val);
-    onLoanAmountChange(val);
+    setLoanAmount(val ? formatNumber(val) : "");
+    onLoanAmountChange(val.replace(/,/g, ""));
   }
 
   function handleLoanOriginationCost(e) {
     const val = e.target.value.replace(/\D/g, "");
-    setLoanOriginationCost(val);
-    onLoanOriginationCostChange(val);
+    setLoanOriginationCost(val ? formatNumber(val) : "");
+    onLoanOriginationCostChange(val.replace(/,/g, ""));
   }
 
   function handleInterestRate(e) {
     const val = e.target.value.replace(/[^\d.]+|(?<=\..*)\./g, "");
-    setInterestRate(val);
-    onInterestRateChange(val);
+    if (interestRateInputType) {
+      setInterestRate(val ? formatNumber(val) : "");
+      onInterestRateChange(val.replace(/,/g, ""));
+    } else {
+      setInterestRate(val);
+      onInterestRateChange(val);
+    }
   }
 
   return (
@@ -43,7 +54,7 @@ const Financing = ({
       </div>
 
       <div className="row">
-        <div className="col">
+        <div className="col-md-6 col-sm-12 mb-0">
           <label className="calculator-label" htmlFor="LoanAmount">
             Loan amount
           </label>
@@ -53,10 +64,10 @@ const Financing = ({
             value={loanAmount}
             onChange={handleLoanAmount}
             placeholder="$000,000"
-            className="form-control form-control-sm"
+            className="form-control form-control-sm mb-1"
           />
         </div>
-        <div className="col">
+        <div className="col-md-6 col-sm-12 mb-1">
           <label className="calculator-label" htmlFor="LoanOriginationCost">
             Loan origination cost
           </label>
@@ -66,12 +77,12 @@ const Financing = ({
             value={loanOriginationCost}
             onChange={handleLoanOriginationCost}
             placeholder="$000,000"
-            className="form-control form-control-sm"
+            className="form-control form-control-sm mb-1"
           />
         </div>
       </div>
       <div className="row">
-        <div className="col-md-6 mb-1">
+        <div className="col-md-6 col-sm-12 mb-0">
           <div className="row justify-content-between">
             <label className="col calculator-label" htmlFor="InterestRate">
               Interest rate
@@ -93,7 +104,7 @@ const Financing = ({
             value={interestRate}
             onChange={handleInterestRate}
             placeholder={interestRateInputType ? "$000,000" : "0.0%"}
-            className="form-control form-control-sm"
+            className="form-control form-control-sm mb-1"
           />
         </div>
         <small id="passwordHelpBlock" className="form-text text-muted">

@@ -17,11 +17,11 @@ const Propertyinfo = () => {
             <h1 className="col-form-label mb-1 pt-0">
               Property Info (All Optional)
             </h1>
-            <div className="row mb-3">
-              <div className="form-group col">
+            <div className="row mb-0">
+              <div className="form-group col-md-6 col-sm-12 mb-1">
                 <select
                   name="Property Type"
-                  className=" form-control form-control-sm form-select pb-0 pt-0"
+                  className=" form-control form-control-sm form-select pb-0 pt-0 mb-2"
                 >
                   <option>Select property type</option>
                   <option>Single family home</option>
@@ -31,10 +31,10 @@ const Propertyinfo = () => {
                   <option>Raw land</option>
                 </select>
               </div>
-              <div className="form-group col">
+              <div className="form-group col-md-6 col-sm-12 mb-1">
                 <select
                   name="Property Type"
-                  className=" form-control form-control-sm form-select pb-0 pt-0"
+                  className=" form-control form-control-sm form-select pb-0 pt-0 mb-2"
                 >
                   <option>Bedrooms</option>
                   <option>1</option>
@@ -45,11 +45,11 @@ const Propertyinfo = () => {
                 </select>
               </div>
             </div>
-            <div className="row mb-3">
-              <div className="form-group col">
+            <div className="row mb-0">
+              <div className="form-group col-md-6 col-sm-12 mb-2">
                 <select
                   name="Property Type"
-                  className=" form-control form-control-sm form-select pb-0 pt-0"
+                  className=" form-control form-control-sm form-select pb-0 pt-0 mb-2"
                 >
                   <option>Bathrooms</option>
                   <option>1</option>
@@ -59,23 +59,23 @@ const Propertyinfo = () => {
                   <option>5</option>
                 </select>
               </div>
-              <div className="form-group col">
+              <div className="form-group col-md-6 col-sm-12 mb-2">
                 <input
                   id="Sq.ft"
                   placeholder="Sq. ft"
-                  className="form-control"
+                  className="form-control mb-1"
                 />
               </div>
             </div>
             <div className="row">
-              <div className="form-group col">
+              <div className="form-group col-md-6 col-sm-12 mb-2">
                 <input
                   id="Lotsize"
                   placeholder="Lot size"
-                  className="form-control"
+                  className="form-control mb-1"
                 />
               </div>
-              <div className="form-group col">
+              <div className="form-group col-md-6 col-sm-12 mb-2">
                 <input
                   id="Yearbuilt"
                   placeholder="Year built"

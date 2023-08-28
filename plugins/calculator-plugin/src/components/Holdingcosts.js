@@ -11,28 +11,36 @@ const Holdingcosts = ({
   const [utilities, setUtilities] = useState("");
   const [other, setOther] = useState("");
 
+  const formatNumber = (value) => {
+    // Remove existing commas and convert to a number
+    const numericValue = parseFloat(value.replace(/,/g, ""));
+
+    // Format the number with commas
+    return numericValue.toLocaleString("en-US");
+  };
+
   function handlePropertyTaxes(e) {
     const val = e.target.value.replace(/\D/g, "");
-    setPropertyTaxes(val);
-    onPropertyTaxesChange(val);
+    setPropertyTaxes(val ? formatNumber(val) : "");
+    onPropertyTaxesChange(val.replace(/,/g, ""));
   }
 
   function handleInsurance(e) {
     const val = e.target.value.replace(/\D/g, "");
-    setInsurance(val);
-    onInsuranceChange(val);
+    setInsurance(val ? formatNumber(val) : "");
+    onInsuranceChange(val.replace(/,/g, ""));
   }
 
   function handleUtilities(e) {
     const val = e.target.value.replace(/\D/g, "");
-    setUtilities(val);
-    onUtilitiesChange(val);
+    setUtilities(val ? formatNumber(val) : "");
+    onUtilitiesChange(val.replace(/,/g, ""));
   }
 
   function handleOther(e) {
     const val = e.target.value.replace(/\D/g, "");
-    setOther(val);
-    onOtherChange(val);
+    setOther(val ? formatNumber(val) : "");
+    onOtherChange(val.replace(/,/g, ""));
   }
 
   return (
@@ -44,7 +52,7 @@ const Holdingcosts = ({
       </div>
       <div>
         <div className="row">
-          <div className="col">
+          <div className="col-md-6 col-sm-12 mb-0">
             <label className="calculator-label" htmlFor="PropertyTaxes">
               Property taxes
             </label>
@@ -54,11 +62,11 @@ const Holdingcosts = ({
               value={propertyTaxes}
               onChange={handlePropertyTaxes}
               placeholder="$000,000"
-              className="form-control form-control-sm"
+              className="form-control form-control-sm mb-1"
             />
           </div>
 
-          <div className="col">
+          <div className="col-md-6 col-sm-12 mb-0">
             <label className="calculator-label" htmlFor="Insurance">
               Insurance
             </label>
@@ -68,12 +76,12 @@ const Holdingcosts = ({
               value={insurance}
               onChange={handleInsurance}
               placeholder="$000,000"
-              className="form-control form-control-sm"
+              className="form-control form-control-sm mb-1"
             />
           </div>
         </div>
         <div className="row">
-          <div className="col">
+          <div className="col-md-6 col-sm-12 mb-0">
             <label className="calculator-label" htmlFor="Utilities">
               Utilities
             </label>
@@ -83,11 +91,11 @@ const Holdingcosts = ({
               value={utilities}
               onChange={handleUtilities}
               placeholder="$000,000"
-              className="form-control form-control-sm"
+              className="form-control form-control-sm mb-1"
             />
           </div>
 
-          <div className="col">
+          <div className="col-md-6 col-sm-12 mb-0">
             <label className="calculator-label" htmlFor="Other">
               Other
             </label>
@@ -97,7 +105,7 @@ const Holdingcosts = ({
               value={other}
               onChange={handleOther}
               placeholder="$000,000"
-              className="form-control form-control-sm"
+              className="form-control form-control-sm mb-1"
             />
           </div>
         </div>

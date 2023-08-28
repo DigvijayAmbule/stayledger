@@ -67,6 +67,9 @@
   margin-right: 20px;
 }
 
+.form-control-sm {
+  margin-bottom: 1rem;
+}
 
 .header_container {
   height: 100vh;
@@ -162,11 +165,12 @@
   row-gap: 1rem;
   column-gap: 2rem;
   margin-bottom: 3rem;
+  margin-top: 8rem;
 }
 
 .calculator-img-container {
   position: absolute;
-  height: 250vh;
+  height: 275%;
   width: 90%;
   display: flex;
   align-items: baseline;
@@ -177,8 +181,8 @@
   display: inline-block;
   width: 18%;
   position: sticky;
-  top: 0;
-  right: 3rem;
+  top: 4.8rem;
+  right: 2rem;
   z-index: 2;
   transform: translateY(-78px);
 }
@@ -209,7 +213,7 @@
 
 .sticky-item {
   position: sticky;
-  top: 0;
+  top: 4.8rem;
   background: #fff;
   border-radius: 1rem;
   z-index: 1;
@@ -302,6 +306,11 @@
   gap: 2rem;
 }
 
+.calulator-btn {
+  display: flex;
+  justify-content: center;
+}
+
 .calculator-btn-primary {
   margin-top: 2rem;
   font-size: 16px;
@@ -366,22 +375,53 @@
 }
 
 
-
 @media only screen and (max-width: 764px) {
+  .result1 {
+    justify-content: center;
+  }
+
+  .calculation-container {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .calculator-img-container {
+    position: relative;
+    width: 75%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    transform: translateX(5rem);
+  }
+
+  .calculator-img {
+    display: inline-block;
+    width: 60%;
+    position: relative;
+  }
+
   .container {
     max-width: 100%;
   }
 
+  .calculator-container {
+    margin-top: 2rem;
+    padding: 0;
+    flex-direction: column;
+  }
+
   .calculator-header {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
     grid-template-rows: auto;
     max-width: 100%;
+    margin-top: 0;
   }
 
   .item-1 {
     grid-column: 1 / 2;
     text-align: center;
+    justify-self: center;
   }
 
 
@@ -389,12 +429,17 @@
     grid-column: 1 / 2;
     padding: 1rem 1.2rem;
     justify-self: auto;
+    border: none;
+    border-radius: 0;
     max-width: 100%;
   }
 
   .item-3 {
     grid-column: 1 / 2;
     max-width: 100%;
+    justify-self: auto;
+    border: none;
+    border-radius: 0;
   }
 
   .sticky-item {
@@ -404,7 +449,7 @@
   .main-title {
     font-size: 2.6rem;
     line-height: 1;
-    font-size: 800;
+    font-weight: 700;
     letter-spacing: .1rem;
     margin-bottom: 2rem;
   }
@@ -427,152 +472,5 @@
     font-size: .6rem;
     line-height: 1;
     font-size: 700;
-  }
-}
-
-@media only screen and (max-width: 576px) {
-  .container {
-    max-width: 100%;
-  }
-
-  .calculator-header {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    max-width: 100%;
-  }
-
-  .item-1 {
-    grid-column: 1 / 2;
-    text-align: center;
-  }
-
-
-  .item-2 {
-    grid-column: 1 / 2;
-    padding: 1rem 1.2rem;
-    justify-self: auto;
-    max-width: 100%;
-  }
-
-  .item-3 {
-    grid-column: 1 / 2;
-    max-width: 100%;
-  }
-
-  .sticky-item {
-    position: static;
-  }
-}
-
-@media only screen and (max-width: 514px) {
-  .container {
-    max-width: 100%;
-  }
-
-  .calculator-header {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    max-width: 90%;
-  }
-
-  .item-1 {
-    grid-column: 1 / 2;
-    text-align: center;
-    max-width: 90%;
-  }
-
-
-  .item-2 {
-    grid-column: 1 / 2;
-    padding: 1rem 1.2rem;
-    justify-self: auto;
-    max-width: 90%;
-  }
-
-  .item-3 {
-    grid-column: 1 / 2;
-    max-width: 90%;
-  }
-
-  .sticky-item {
-    position: static;
-  }
-}
-
-@media only screen and (max-width: 460px) {
-  .container {
-    max-width: 100%;
-  }
-
-  .calculator-header {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    max-width: 80%;
-  }
-
-  .item-1 {
-    grid-column: 1 / 2;
-    text-align: center;
-    max-width: 80%;
-  }
-
-
-  .item-2 {
-    grid-column: 1 / 2;
-    padding: 1rem 1.2rem;
-    justify-self: auto;
-    max-width: 80%;
-  }
-
-  .item-3 {
-    grid-column: 1 / 2;
-    max-width: 80%;
-  }
-
-  .sticky-item {
-    position: static;
-  }
-}
-
-@media only screen and (max-width: 417px) {
-  .container {
-    max-width: 100%;
-  }
-
-  .calculator-header {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    max-width: 75%;
-  }
-
-  .item-1 {
-    grid-column: 1 / 2;
-    text-align: center;
-    max-width: 75%;
-    justify-self: start;
-
-  }
-
-
-  .item-2 {
-    grid-column: 1 / 2;
-    padding: 1rem 1.2rem;
-    justify-self: start;
-    max-width: 75%;
-  }
-
-  .item-3 {
-    grid-column: 1 / 2;
-    max-width: 75%;
-    justify-self: start;
-
-  }
-
-  .sticky-item {
-    position: static;
   }
 }

@@ -13,6 +13,13 @@ const Calculation = ({
   annualROI,
   IRR,
 }) => {
+  const formatNumber = (value) => {
+    // Remove existing commas and convert to a number
+    const numericValue = parseFloat(value.replace(/,/g, ""));
+
+    // Format the number with commas
+    return numericValue.toLocaleString("en-US");
+  };
   return (
     <>
       <div className="card-calculation">
@@ -26,7 +33,7 @@ const Calculation = ({
           <option value="2">Home 3</option>
         </select>
         <p className="card-output">
-          ${finalProfit ? finalProfit.toFixed(0) : "000,000"}
+          ${finalProfit ? formatNumber(finalProfit.toFixed(0)) : "000,000"}
         </p>
         <div className="calculation-container">
           <div className="calculation">
@@ -36,26 +43,34 @@ const Calculation = ({
                 <p className="calculation-row-title">Purchase price</p>
                 <p className="value">
                   {" "}
-                  ${pPrice ? pPrice.toFixed(0) : "000,000"}
+                  ${pPrice ? formatNumber(pPrice.toFixed(0)) : "000,000"}
                 </p>
               </div>
               <div className="result1">
                 <p className="calculation-row-title">Purchase cost</p>
                 <p className="value">
                   $
-                  {FinalPurchasecost ? FinalPurchasecost.toFixed(0) : "000,000"}
+                  {FinalPurchasecost
+                    ? formatNumber(FinalPurchasecost.toFixed(0))
+                    : "000,000"}
                 </p>
               </div>
               <div className="result1">
                 <p className="calculation-row-title">Rehab cost</p>
                 <p className="value">
-                  ${finalRehabCost ? finalRehabCost.toFixed(0) : "000,000"}
+                  $
+                  {finalRehabCost
+                    ? formatNumber(finalRehabCost.toFixed(0))
+                    : "000,000"}
                 </p>
               </div>
               <div className="result1">
                 <p className="calculation-row-title">Holding cost</p>
                 <p className="value">
-                  ${finalHoldingCost ? finalHoldingCost.toFixed(0) : "000,000"}
+                  $
+                  {finalHoldingCost
+                    ? formatNumber(finalHoldingCost.toFixed(0))
+                    : "000,000"}
                 </p>
               </div>
 
@@ -63,7 +78,8 @@ const Calculation = ({
                 <p className="calculation-row-title">Loan Amount</p>
                 <p className="value">
                   {" "}
-                  ${loanAmount ? loanAmount.toFixed(0) : "000,000"}
+                  $
+                  {loanAmount ? formatNumber(loanAmount.toFixed(0)) : "000,000"}
                 </p>
               </div>
               <div className="result1">
@@ -72,7 +88,7 @@ const Calculation = ({
                   {" "}
                   $
                   {Out_Of_Pocket_Costs
-                    ? Out_Of_Pocket_Costs.toFixed(0)
+                    ? formatNumber(Out_Of_Pocket_Costs.toFixed(0))
                     : "000,000"}
                 </p>
               </div>

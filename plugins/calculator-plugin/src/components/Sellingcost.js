@@ -14,22 +14,40 @@ const Sellingcost = ({
   const [CommissionToAgentsInputType, setCommissionToAgentsInputType] =
     useState(0);
 
+  const formatNumber = (value) => {
+    // Remove existing commas and convert to a number
+    const numericValue = parseFloat(value.replace(/,/g, ""));
+
+    // Format the number with commas
+    return numericValue.toLocaleString("en-US");
+  };
+
   function handleAfterRepairValue(e) {
     const val = e.target.value.replace(/\D/g, "");
-    setAfterRepairValue(val);
-    onAfterRepairValueChange(val);
+    setAfterRepairValue(val ? formatNumber(val) : "");
+    onAfterRepairValueChange(val.replace(/,/g, ""));
   }
 
   function handleCommissionToAgents(e) {
     const val = e.target.value.replace(/[^\d.]+|(?<=\..*)\./g, "");
-    setCommissionToAgents(val);
-    onCommissionToAgentsChange(val);
+    if (CommissionToAgentsInputType) {
+      setCommissionToAgents(val ? formatNumber(val) : "");
+      onCommissionToAgentsChange(val.replace(/,/g, ""));
+    } else {
+      setCommissionToAgents(val);
+      onCommissionToAgentsChange(val);
+    }
   }
 
   function handleSellingClosingCosts(e) {
     const val = e.target.value.replace(/[^\d.]+|(?<=\..*)\./g, "");
-    setSellingClosingCosts(val);
-    onSellingClosingCostsChange(val);
+    if (ClosingCostsInputType) {
+      setSellingClosingCosts(val ? formatNumber(val) : "");
+      onSellingClosingCostsChange(val.replace(/,/g, ""));
+    } else {
+      setSellingClosingCosts(val);
+      onSellingClosingCostsChange(val);
+    }
   }
 
   function handleClosingCostInput(e) {
@@ -51,7 +69,7 @@ const Sellingcost = ({
       </div>
       <div>
         <div className="row">
-          <div className="col">
+          <div className="col-md-6 col-sm-12 mb-0">
             <label className="calculator-label" htmlFor="AfterRepairValue">
               After repair value (ARV)
             </label>
@@ -61,14 +79,14 @@ const Sellingcost = ({
               value={AfterRepairValue}
               onChange={handleAfterRepairValue}
               placeholder="$000,000"
-              className="form-control form-control-sm"
+              className="form-control form-control-sm mb-1"
             />
           </div>
 
-          <div className="col">
+          <div className="col-md-6 col-sm-12 mb-0">
             <div className="row justify-content-between">
               <label
-                className="col-md-7 calculator-label"
+                className="col-md-7 col  calculator-label"
                 htmlFor="CommissionToAgents"
               >
                 Commission to agents
@@ -90,7 +108,7 @@ const Sellingcost = ({
               value={CommissionToAgents}
               onChange={handleCommissionToAgents}
               placeholder={CommissionToAgentsInputType ? "$000,000" : "0.0%"}
-              className="form-control form-control-sm"
+              className="form-control form-control-sm mb-1"
             />
           </div>
         </div>
@@ -120,7 +138,7 @@ const Sellingcost = ({
               value={SellingClosingCosts}
               onChange={handleSellingClosingCosts}
               placeholder={ClosingCostsInputType ? "$000,000" : "0.0%"}
-              className="form-control form-control-sm"
+              className="form-control form-control-sm mb-1"
             />
           </div>
           <small id="passwordHelpBlock" className="form-text text-muted">
