@@ -129,12 +129,10 @@ const Calculator = () => {
     setContractor(parseInt(val));
   };
 
-  const pPrice = purchasePrice;
-
   // Appraisel+Inspecton+(Loan origination costs*Loan ammount)+(Closing costs*Purchase price)
 
   useEffect(() => {
-    if (setIsClosingCostsAmmount) {
+    if (IsClosingCostsAmmount) {
       setFinalPurchasecost(
         loanAmount * (loanOriginationCost / 100) +
           ClosingCosts +
@@ -156,7 +154,7 @@ const Calculator = () => {
     ClosingCosts,
     SurveysFees,
     AppraisalFees,
-    setIsClosingCostsAmmount,
+    IsClosingCostsAmmount,
   ]);
   const [diffDays, setdiffDays] = useState(0);
   useEffect(() => {
@@ -175,15 +173,15 @@ const Calculator = () => {
     }
   }, [loanAmount, diffDays, interestRate, IsInterestRateAmmount]);
 
-  const finalHoldingCost =
-    InterestPayments + propertyTaxes + insurance + utilities + other;
-
   const [finalCommissionToAgents, setfinalCommissionToAgents] = useState(0);
 
   useEffect(() => {
     if (IsCommissionToAgentsAmmount) {
+      console.log(CommissionToAgents);
       setfinalCommissionToAgents(CommissionToAgents);
     } else {
+      console.log(CommissionToAgents);
+      console.log(AfterRepairValue * (CommissionToAgents / 100));
       setfinalCommissionToAgents(AfterRepairValue * (CommissionToAgents / 100));
     }
   }, [AfterRepairValue, CommissionToAgents, IsCommissionToAgentsAmmount]);
@@ -198,17 +196,64 @@ const Calculator = () => {
     }
   }, [AfterRepairValue, SellingClosingCosts, IsSellingClosingCostsAmmount]);
 
-  const finalSellingCost = finalCommissionToAgents + finalClosingCosts;
-  const finalRehabCost = Materials + Contractor;
-  const finalTotalExpenses =
-    FinalPurchasecost + finalRehabCost + finalHoldingCost + finalSellingCost;
-  const finalProfit = AfterRepairValue - purchasePrice - finalTotalExpenses;
-  const Out_Of_Pocket_Costs =
-    pPrice + FinalPurchasecost + finalRehabCost + finalHoldingCost - loanAmount;
-  const ROI = (finalProfit / Out_Of_Pocket_Costs) * 100;
+  const [finalHoldingCost, setfinalHoldingCost] = useState(0);
+  useEffect(() => {
+    setfinalHoldingCost(
+      InterestPayments + propertyTaxes + insurance + utilities + other
+    );
+  }, [InterestPayments, propertyTaxes, insurance, utilities, other]);
+
+  const [finalSellingCost, setfinalSellingCost] = useState(0);
+  useEffect(() => {
+    setfinalSellingCost(finalCommissionToAgents + finalClosingCosts);
+  }, [finalCommissionToAgents, finalClosingCosts]);
+
+  const [finalRehabCost, setfinalRehabCost] = useState(0);
+  useEffect(() => {
+    setfinalRehabCost(Materials + Contractor);
+  }, [Materials, Contractor]);
+
+  const [finalTotalExpenses, setfinalTotalExpenses] = useState(0);
+  useEffect(() => {
+    setfinalTotalExpenses(
+      FinalPurchasecost + finalRehabCost + finalHoldingCost + finalSellingCost
+    );
+  }, [FinalPurchasecost, finalRehabCost, finalHoldingCost, finalSellingCost]);
+
+  const [finalProfit, setfinalProfit] = useState(0);
+  useEffect(() => {
+    setfinalProfit(AfterRepairValue - purchasePrice - finalTotalExpenses);
+  }, [AfterRepairValue, purchasePrice, finalTotalExpenses]);
+
+  const [Out_Of_Pocket_Costs, setOut_Of_Pocket_Costs] = useState(0);
+  useEffect(() => {
+    setOut_Of_Pocket_Costs(
+      purchasePrice +
+        FinalPurchasecost +
+        finalRehabCost +
+        finalHoldingCost -
+        loanAmount
+    );
+  }, [
+    purchasePrice,
+    FinalPurchasecost,
+    finalRehabCost,
+    finalHoldingCost,
+    loanAmount,
+  ]);
+
+  const [ROI, setROI] = useState(0);
+  useEffect(() => {
+    setROI((finalProfit / Out_Of_Pocket_Costs) * 100);
+  }, [finalProfit, Out_Of_Pocket_Costs]);
   const oneDay = 24 * 60 * 60 * 1000; // One day in milliseconds
   const timeDiff = Math.ceil((endDate - startDate) / oneDay); // Rounded up to ensure inclusive months
-  const annualROI = ROI / (timeDiff / 365);
+  const [annualROI, setannualROI] = useState(0);
+  useEffect(() => {
+    console.log(ROI + "=>ROI");
+    console.log(timeDiff + "=>timeDiff");
+    setannualROI(ROI / (timeDiff / 365));
+  }, [ROI, timeDiff]);
 
   // IRR Functions and calculations
 
@@ -223,10 +268,37 @@ const Calculator = () => {
 
     return datesArray;
   }
+  const [dates, setDates] = useState([]);
+  useEffect(() => {
+    setDates(generateDateArray(startDate, endDate));
+  }, [startDate, endDate]);
 
   // Example usage
 
-  const dates = generateDateArray(startDate, endDate);
+  const [cashFlow, setcashFlow] = useState([]);
+  useEffect(() => {
+    setcashFlow(
+      calculateCashflow(
+        purchasePrice,
+        FinalPurchasecost,
+        finalRehabCost,
+        finalHoldingCost,
+        finalSellingCost,
+        AfterRepairValue,
+        loanAmount,
+        dates
+      )
+    );
+  }, [
+    purchasePrice,
+    FinalPurchasecost,
+    finalRehabCost,
+    finalHoldingCost,
+    finalSellingCost,
+    AfterRepairValue,
+    loanAmount,
+    dates,
+  ]);
 
   function calculateCashflow(
     pPrice,
@@ -244,27 +316,14 @@ const Calculator = () => {
     const hCost = finalHoldingCost / months;
     const selling = AfterRepairValue - finalSellingCost - loanAmount;
 
-    const cashFlow = [];
-    cashFlow.push(-(pCost + rCost + hCost));
+    const cashFlowArray = [];
+    cashFlowArray.push(-(pCost + rCost + hCost));
     for (let index = 1; index < months; index++) {
-      cashFlow.push(-(rCost + hCost));
+      cashFlowArray.push(-(rCost + hCost));
     }
-    cashFlow.push(selling);
-    return cashFlow;
+    cashFlowArray.push(selling);
+    return cashFlowArray;
   }
-
-  const cashFlow = calculateCashflow(
-    pPrice,
-    FinalPurchasecost,
-    finalRehabCost,
-    finalHoldingCost,
-    finalSellingCost,
-    AfterRepairValue,
-    loanAmount,
-    dates
-  );
-
-  // console.log(cashFlow)
 
   function calculateXIRR(cashflows, dates, guess = 0.1) {
     const MAX_ITERATIONS = dates.length;
@@ -317,34 +376,10 @@ const Calculator = () => {
     return null; // Failed to converge
   }
 
-  console.log(cashFlow);
-
-  // const xirr = calculateXIRR(cashFlow, dates);
-
   useEffect(() => {
-    const irr = calculateXIRR(cashFlow, dates);
     // const irr = 0;
-    setIRR(irr * 100);
-  }, [
-    purchasePrice,
-    AppraisalFees,
-    SurveysFees,
-    ClosingCosts,
-    Materials,
-    Contractor,
-    AfterRepairValue,
-    CommissionToAgents,
-    SellingClosingCosts,
-    loanAmount,
-    loanOriginationCost,
-    interestRate,
-    startDate,
-    endDate,
-    propertyTaxes,
-    insurance,
-    utilities,
-    other,
-  ]);
+    setIRR(calculateXIRR(cashFlow, dates) * 100);
+  }, [cashFlow, dates]);
 
   console.log(irr + "irr");
 
@@ -363,7 +398,7 @@ const Calculator = () => {
           <div className="sticky-item item-2">
             <Calculation
               finalProfit={finalProfit}
-              pPrice={pPrice}
+              pPrice={purchasePrice}
               FinalPurchasecost={FinalPurchasecost}
               finalRehabCost={finalRehabCost}
               finalHoldingCost={finalHoldingCost}
@@ -415,6 +450,11 @@ const Calculator = () => {
                 handleIsCommissionToAgentsAmmount
               }
             ></Sellingcost>
+            <div className="calulator-btn">
+              <button type="button" className="btn w-75 calculator-btn-primary">
+                Run Another Scenario
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -4,16 +4,24 @@ const Rehabcosts = ({ onMaterialsChange, onContractorChange }) => {
   const [Materials, setMaterials] = useState("");
   const [Contractor, setContractor] = useState("");
 
+  const formatNumber = (value) => {
+    // Remove existing commas and convert to a number
+    const numericValue = parseFloat(value.replace(/,/g, ""));
+
+    // Format the number with commas
+    return numericValue.toLocaleString("en-US");
+  };
+
   function handleMaterials(e) {
     const val = e.target.value.replace(/\D/g, "");
-    setMaterials(val);
-    onMaterialsChange(val);
+    setMaterials(val ? formatNumber(val) : "");
+    onMaterialsChange(val.replace(/,/g, ""));
   }
 
   function handleContractor(e) {
     const val = e.target.value.replace(/\D/g, "");
-    setContractor(val);
-    onContractorChange(val);
+    setContractor(val ? formatNumber(val) : "");
+    onContractorChange(val.replace(/,/g, ""));
   }
 
   return (
@@ -24,7 +32,7 @@ const Rehabcosts = ({ onMaterialsChange, onContractorChange }) => {
         </h1>
       </div>
       <div className="row">
-        <div className="col">
+        <div className="col-md-6 col-sm-12 mb-0">
           <label className="calculator-label" htmlFor="Materials">
             Materials
           </label>
@@ -34,10 +42,10 @@ const Rehabcosts = ({ onMaterialsChange, onContractorChange }) => {
             value={Materials}
             onChange={handleMaterials}
             placeholder="$000,000"
-            className="form-control form-control-sm"
+            className="form-control form-control-sm mb-1"
           />
         </div>
-        <div className="col">
+        <div className="col-md-6 col-sm-12 mb-0">
           <label className="calculator-label" htmlFor="Contractor">
             Contractor / Labor
           </label>
@@ -47,7 +55,7 @@ const Rehabcosts = ({ onMaterialsChange, onContractorChange }) => {
             value={Contractor}
             onChange={handleContractor}
             placeholder="$000,000"
-            className="form-control form-control-sm"
+            className="form-control form-control-sm mb-1"
           />
         </div>
         <small id="passwordHelpBlock" className="form-text text-muted">
